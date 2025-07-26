@@ -7,7 +7,7 @@ fetch('header.html')
     const menuBtn = document.getElementById("menuButton");
     const dropdown = document.getElementById("menuDropdown");
     const langToggleBtn = document.getElementById("langToggleBtn");
-    let isEnglish = localStorage.getItem("language") === "en";
+    let isEnglish = false;
 
     // Dropdown toggle
     menuBtn?.addEventListener("click", () => {
@@ -25,8 +25,8 @@ fetch('header.html')
     });
 
     // Language toggle
-    const applyLanguage = () => {
-      localStorage.setItem("language", isEnglish ? "en" : "es");
+    langToggleBtn?.addEventListener("click", () => {
+      isEnglish = !isEnglish;
       langToggleBtn.textContent = isEnglish ? 'Español' : 'English';
 
       const setText = (id, text) => {
@@ -87,50 +87,7 @@ fetch('header.html')
       setText('footer-privacy', 'Privacy Policy');
       setText('footer-prayer', isEnglish ? 'Prayer' : 'Oracion/Prayer');
       setText('footer-church-info', 'Church Filing Info');
-
-      // Additional sections (safely)
-      const pastorName = document.querySelector(".pastor-namee");
-      if (pastorName) pastorName.textContent = isEnglish ? "Valentin & Sonia Blancas" : "Valentín y Sonia Blancas";
-
-      const welcomeParagraph = document.querySelector(".welcome p");
-      if (welcomeParagraph) {
-        welcomeParagraph.textContent = isEnglish
-          ? "Welcome to IDJ House of Refuge. Our pastors carry a vision of faith, restoration, and community, centered on the love of Christ."
-          : "Bienvenidos a IDJ Casa de Refugio. Nuestros pastores llevan una visión de fe, restauración y comunidad, centrada en el amor de Cristo.";
-      }
-
-      const contactTitle = document.querySelector("#contact-section h2");
-      if (contactTitle) contactTitle.textContent = isEnglish ? "Contact" : "Contacto";
-
-      const contactSubtext = document.querySelector("#contact-section p");
-      if (contactSubtext) contactSubtext.textContent = isEnglish ? "Join us at:" : "Te esperamos en:";
-
-      const contactDetails = document.querySelector("#contact-section p + p");
-      if (contactDetails) {
-        contactDetails.innerHTML = isEnglish
-          ? `<strong>Phone:</strong> (760) 675-4847<br>
-             <strong>Email:</strong> casaderefugio0724@gmail.com<br><br>
-             <strong>IDJ Casa De Refugio</strong><br>
-             830 East Vista Way, Suite 221<br>
-             Vista, California 92083, United States`
-          : `<strong>Teléfono:</strong> (760) 675-4847<br>
-             <strong>Correo:</strong> casaderefugio0724@gmail.com<br><br>
-             <strong>IDJ Casa De Refugio</strong><br>
-             830 East Vista Way, Suite 221<br>
-             Vista, California 92083, United States`;
-      }
-
-      const pastorTitle = document.querySelector(".pastor-title");
-      if (pastorTitle) pastorTitle.textContent = isEnglish ? "Pastors of the Church" : "Pastores de la Iglesia";
-    };
-
-    langToggleBtn?.addEventListener("click", () => {
-      isEnglish = !isEnglish;
-      applyLanguage();
     });
-
-    // Initial load
-    applyLanguage();
   });
 
 // Load footer
@@ -174,7 +131,9 @@ document.addEventListener("DOMContentLoaded", () => {
   popupCloseBtn?.addEventListener('click', closePopup);
 
   popupOverlay?.addEventListener('click', (e) => {
-    if (e.target === popupOverlay) closePopup();
+    if (e.target === popupOverlay) {
+      closePopup();
+    }
   });
 
   document.addEventListener('keydown', (e) => {
@@ -183,6 +142,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
 
 // Lightbox logic
 document.addEventListener("DOMContentLoaded", function () {
@@ -193,7 +153,6 @@ document.addEventListener("DOMContentLoaded", function () {
   // Open lightbox on image click
   document.querySelectorAll(".gallery img").forEach(img => {
     img.addEventListener("click", function () {
-      if (!lightbox || !lightboxImg) return;
       lightbox.style.display = "flex";
       lightboxImg.src = this.src;
       lightboxImg.alt = this.alt;
@@ -201,12 +160,78 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // Close lightbox
-  closeBtn?.addEventListener("click", function () {
-    if (lightbox) lightbox.style.display = "none";
+  closeBtn.addEventListener("click", function () {
+    lightbox.style.display = "none";
   });
 
-  // Close if clicking outside the image
-  lightbox?.addEventListener("click", function (e) {
-    if (e.target === lightbox) lightbox.style.display = "none";
+  // Close if you click outside the image
+  lightbox.addEventListener("click", function (e) {
+    if (e.target === lightbox) {
+      lightbox.style.display = "none";
+    }
   });
 });
+
+function toggleLanguage() {
+  const isSpanish = document.documentElement.lang === "es";
+  const newLang = isSpanish ? "en" : "es";
+  document.documentElement.lang = newLang;
+
+  const updateText = (id, text) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = text;
+  };
+
+  updateText("nav-welcome", newLang === "en" ? "Welcome" : "Bienvenida");
+  updateText("nav-pastor", "Pastor");
+  updateText("nav-contact", newLang === "en" ? "Information" : "Información");
+  updateText("nav-gallery", newLang === "en" ? "Gallery" : "Galería");
+
+  const langBtn = document.querySelector(".lang-btn");
+  if (langBtn) langBtn.textContent = newLang === "en" ? "Español" : "English"; // switch target language
+
+  const navOffering = document.getElementById("nav-offering");
+  if (navOffering) {
+    navOffering.innerHTML = `
+      <img src="https://cdn.iconscout.com/icon/free/png-256/venmo-2-569346.png" alt="Venmo" style="height: 20px;">
+      ${newLang === "en" ? "Offering / Tithe" : "Ofrenda / Diezmo"}
+    `;
+  }
+
+  const slogan = document.getElementById("slogan");
+  if (slogan) slogan.textContent = newLang === "en" ? "Come Home" : "Vuelve a Casa";
+
+  const pastorTitle = document.querySelector(".pastor-title");
+  if (pastorTitle) pastorTitle.textContent = newLang === "en" ? "Pastors of the Church" : "Pastores de la Iglesia";
+
+  const pastorName = document.querySelector(".pastor-name");
+  if (pastorName) pastorName.textContent = newLang === "en" ? "Valentin & Sonia Blancas" : "Valentín y Sonia Blancas";
+
+  const welcomePara = document.querySelector("#Welcome p");
+  if (welcomePara) {
+    welcomePara.textContent = newLang === "en"
+      ? "Welcome to IDJ Casa de Refugio. Our pastors carry a vision of faith, restoration, and community, centered on the love of Christ."
+      : "Bienvenidos a IDJ Casa de Refugio. Nuestros pastores llevan una visión de fe, restauración y comunidad, centrada en el amor de Cristo.";
+  }
+
+  const contactHeading = document.querySelector("#contact-section h2");
+  if (contactHeading) contactHeading.textContent = newLang === "en" ? "Contact" : "Contacto";
+
+  const contactIntro = document.querySelector("#contact-section p");
+  if (contactIntro) contactIntro.textContent = newLang === "en" ? "Join us at:" : "Te esperamos en:";
+
+  const contactDetails = document.querySelector("#contact-section p + p");
+  if (contactDetails) {
+    contactDetails.innerHTML = newLang === "en"
+      ? `<strong>Phone:</strong> (760) 675-4847<br>
+         <strong>Email:</strong> casaderefugio0724@gmail.com<br><br>
+         <strong>IDJ Casa De Refugio</strong><br>
+         830 East Vista Way, Suite 221<br>
+         Vista, California 92083, United States`
+      : `<strong>Teléfono:</strong> (760) 675-4847<br>
+         <strong>Correo:</strong> casaderefugio0724@gmail.com<br><br>
+         <strong>IDJ Casa De Refugio</strong><br>
+         830 East Vista Way, Suite 221<br>
+         Vista, California 92083, United States`;
+  }
+}
