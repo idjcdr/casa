@@ -41,7 +41,7 @@ fetch('header.html')
 
       // Header
       setText('header-title', isEnglish ? 'IDJ House of Refuge' : 'IDJ Casa de Refugio');
-      setText('header-subtitle', isEnglish ? 'Welcome to our family of faith' : 'Bienvenidos a nuestra familia de fe');
+      setText('header-subtitle', isEnglish ? 'Vuelve a Casa' : 'Vuelve a Casa');
 
       // Nav
       setText('nav-welcome', isEnglish ? 'Welcome' : 'Bienvenida');
@@ -199,7 +199,7 @@ function toggleLanguage() {
   }
 
   const slogan = document.getElementById("slogan");
-  if (slogan) slogan.textContent = newLang === "en" ? "Come Home" : "Vuelve a Casa";
+  if (slogan) slogan.textContent = newLang === "en" ? "Vuelve a Casa" : "Vuelve a Casa";
 
   const pastorTitle = document.querySelector(".pastor-title");
   if (pastorTitle) pastorTitle.textContent = newLang === "en" ? "Pastors of the Church" : "Pastores de la Iglesia";
