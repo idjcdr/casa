@@ -171,3 +171,5 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+
+<button onclick="toggleLanguage()" class="lang-btn">English</button>
