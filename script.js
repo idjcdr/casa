@@ -206,6 +206,9 @@ function toggleLanguage() {
 
   const pastorName = document.querySelector(".pastor-name");
   if (pastorName) pastorName.textContent = newLang === "en" ? "Valentin & Sonia Blancas" : "Valentín y Sonia Blancas";
+  
+  const unpacto = document.querySelector(".unpacto");
+  if (unpacto) unpacto.textContent = newLang === "en" ? "A Pact not a Contract" : "Un Pacto no un Contrato";
 
   const welcomePara = document.querySelector("#Welcome p");
   if (welcomePara) {
