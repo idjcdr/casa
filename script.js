@@ -263,3 +263,34 @@ function translateGalleryPage() {
     galleryImages[2].alt = newLang === "en" ? "Covenant image 3" : "Descripción 3";
   }
 }
+
+
+  <script>
+    function toggleDropdown() {
+      const dropdown = document.getElementById("menuDropdown");
+      dropdown.classList.toggle("show");
+    }
+
+    function toggleLanguage() {
+      const isSpanish = document.documentElement.lang === "es";
+      document.documentElement.lang = isSpanish ? "en" : "es";
+
+      document.getElementById("nav-welcome").textContent = isSpanish ? "Welcome" : "Bienvenida";
+      document.getElementById("nav-pastor").textContent = isSpanish ? "Pastor" : "Pastor";
+      document.getElementById("nav-contact").textContent = isSpanish ? "Information" : "Información";
+      document.getElementById("nav-gallery").textContent = isSpanish ? "Gallery" : "Galería";
+      document.getElementById("gallery-title").textContent = isSpanish ? "Photo Gallery" : "Galería de Fotos";
+      document.getElementById("slogan").textContent = isSpanish ? "" : "";
+      document.querySelector(".lang-btn").textContent = isSpanish ? "Español" : "English";
+      // "Ofrenda / Offering" remains unchanged
+    }
+
+    window.onclick = function(event) {
+      if (!event.target.closest('.dropdown')) {
+        const dropdowns = document.getElementsByClassName("dropdown-content");
+        for (let i = 0; i < dropdowns.length; i++) {
+          dropdowns[i].classList.remove('show');
+        }
+      }
+    }
+  </script>
