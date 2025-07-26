@@ -7,7 +7,7 @@ fetch('header.html')
     const menuBtn = document.getElementById("menuButton");
     const dropdown = document.getElementById("menuDropdown");
     const langToggleBtn = document.getElementById("langToggleBtn");
-    let isEnglish = false;
+    let isEnglish = localStorage.getItem("language") === "en";
 
     // Dropdown toggle
     menuBtn?.addEventListener("click", () => {
@@ -25,8 +25,8 @@ fetch('header.html')
     });
 
     // Language toggle
-    langToggleBtn?.addEventListener("click", () => {
-      isEnglish = !isEnglish;
+    const applyLanguage = () => {
+      localStorage.setItem("language", isEnglish ? "en" : "es");
       langToggleBtn.textContent = isEnglish ? 'Español' : 'English';
 
       const setText = (id, text) => {
@@ -87,7 +87,50 @@ fetch('header.html')
       setText('footer-privacy', 'Privacy Policy');
       setText('footer-prayer', isEnglish ? 'Prayer' : 'Oracion/Prayer');
       setText('footer-church-info', 'Church Filing Info');
+
+      // Additional sections (safely)
+      const pastorName = document.querySelector(".pastor-namee");
+      if (pastorName) pastorName.textContent = isEnglish ? "Valentin & Sonia Blancas" : "Valentín y Sonia Blancas";
+
+      const welcomeParagraph = document.querySelector(".welcome p");
+      if (welcomeParagraph) {
+        welcomeParagraph.textContent = isEnglish
+          ? "Welcome to IDJ House of Refuge. Our pastors carry a vision of faith, restoration, and community, centered on the love of Christ."
+          : "Bienvenidos a IDJ Casa de Refugio. Nuestros pastores llevan una visión de fe, restauración y comunidad, centrada en el amor de Cristo.";
+      }
+
+      const contactTitle = document.querySelector("#contact-section h2");
+      if (contactTitle) contactTitle.textContent = isEnglish ? "Contact" : "Contacto";
+
+      const contactSubtext = document.querySelector("#contact-section p");
+      if (contactSubtext) contactSubtext.textContent = isEnglish ? "Join us at:" : "Te esperamos en:";
+
+      const contactDetails = document.querySelector("#contact-section p + p");
+      if (contactDetails) {
+        contactDetails.innerHTML = isEnglish
+          ? `<strong>Phone:</strong> (760) 675-4847<br>
+             <strong>Email:</strong> casaderefugio0724@gmail.com<br><br>
+             <strong>IDJ Casa De Refugio</strong><br>
+             830 East Vista Way, Suite 221<br>
+             Vista, California 92083, United States`
+          : `<strong>Teléfono:</strong> (760) 675-4847<br>
+             <strong>Correo:</strong> casaderefugio0724@gmail.com<br><br>
+             <strong>IDJ Casa De Refugio</strong><br>
+             830 East Vista Way, Suite 221<br>
+             Vista, California 92083, United States`;
+      }
+
+      const pastorTitle = document.querySelector(".pastor-title");
+      if (pastorTitle) pastorTitle.textContent = isEnglish ? "Pastors of the Church" : "Pastores de la Iglesia";
+    };
+
+    langToggleBtn?.addEventListener("click", () => {
+      isEnglish = !isEnglish;
+      applyLanguage();
     });
+
+    // Initial load
+    applyLanguage();
   });
 
 // Load footer
@@ -131,9 +174,7 @@ document.addEventListener("DOMContentLoaded", () => {
   popupCloseBtn?.addEventListener('click', closePopup);
 
   popupOverlay?.addEventListener('click', (e) => {
-    if (e.target === popupOverlay) {
-      closePopup();
-    }
+    if (e.target === popupOverlay) closePopup();
   });
 
   document.addEventListener('keydown', (e) => {
@@ -142,7 +183,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
-
 
 // Lightbox logic
 document.addEventListener("DOMContentLoaded", function () {
@@ -153,6 +193,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Open lightbox on image click
   document.querySelectorAll(".gallery img").forEach(img => {
     img.addEventListener("click", function () {
+      if (!lightbox || !lightboxImg) return;
       lightbox.style.display = "flex";
       lightboxImg.src = this.src;
       lightboxImg.alt = this.alt;
@@ -160,14 +201,12 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // Close lightbox
-  closeBtn.addEventListener("click", function () {
-    lightbox.style.display = "none";
+  closeBtn?.addEventListener("click", function () {
+    if (lightbox) lightbox.style.display = "none";
   });
 
-  // Close if you click outside the image
-  lightbox.addEventListener("click", function (e) {
-    if (e.target === lightbox) {
-      lightbox.style.display = "none";
-    }
+  // Close if clicking outside the image
+  lightbox?.addEventListener("click", function (e) {
+    if (e.target === lightbox) lightbox.style.display = "none";
   });
 });
