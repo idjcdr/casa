@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Galería – IDJ Casa de Refugio</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+</head>
+
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 900,
+    easing: 'ease-in-out',
+    once: true,
+    mirror: false
+  });
+</script>
+
+<body>
+
+<div id="header"></div>
+
+
+<main>
+  <section data-aos="fade-up" data-aos-delay="100">
+    <h2 id="vision-title">Visión de la Iglesia</h2>
+    <div class="split">
+      <div class="image-column">
+        <img src="https://i.postimg.cc/1XV1PPK2/IMG-2987.jpg" alt="Visión Image 1" />
+        <img src="https://i.postimg.cc/d1thD9jK/IMG-3439.jpg" alt="Visión Image 2" />
+      </div>
+      <div class="text-column">
+        <p id="vision-text">Nuestra misión es transformar comunidades y llevar a otros hacia Cristo. Somos una comunidad que busca glorificar a Dios entregándonos a Jesús.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-aos="fade-up" data-aos-delay="200" class="reverse">
+    <h2 id="schedule-title">Horarios de Servicio</h2>
+    <div class="split">
+      <div class="image-column">
+        <img src="https://i.postimg.cc/CKvcRcpG/IMG-2541.jpg" alt="Horario Image 1" />
+        <img src="https://i.postimg.cc/LsSYFSq5/IMG-3734.jpg" alt="Horario Image 2" />
+      </div>
+      <div class="text-column">
+        <ul id="schedule-list">
+          <li><strong>Domingo:</strong></li>
+          <li>Servicio General - 4:30 PM</li>
+          <li><strong>Martes:</strong></li> 
+          <li>Estudio Bíblico - 7:00 PM</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section data-aos="fade-up" data-aos-delay="300">
+    <h2 id="pastor-message-title">Mensaje del Pastor</h2>
+    <div class="split">
+      <div class="image-column">
+        <img src="https://i.postimg.cc/hPJ79pWD/IMG-3863.jpg" alt="Pastor Image 1" />
+        <img src="https://i.postimg.cc/FKxf96cZ/IMG-3716.jpg" alt="Pastor Image 2" />
+      </div>
+      <div class="text-column">
+        <p id="pastor-message-text">"Nuestro deseo es que cada persona que entre por nuestras puertas experimente el amor de Cristo y reciba la restauración que solo Él puede dar. Te invitamos a formar parte de esta familia de fe."<br /><br /> — Pastor Valentin Blancas</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-aos="fade-up" data-aos-delay="400" class="reverse">
+    <h2 id="contact-title">Contacto</h2>
+    <div class="split">
+      <div class="image-column">
+        <img src="https://i.postimg.cc/MTnXwpY7/IMG-3216.jpg" alt="Contacto" />
+      </div>
+      <div class="text-column">
+        <ul id="contact-list">
+          <li><strong>📍Dirección:</strong></li>
+          <li>830 E Vista Way, Suite 221, Vista, CA 92084</li>
+          <li><strong>📞 Teléfono:</strong></li>
+          <li>(760) 675-4847</li>
+          <li><strong>📧 Correo:</strong></li> 
+          <li>casaderefugio0724@gmail.com</li>
+        </ul>
+      </div>
+    </div>
+    <iframe
+      src="https://www.google.com/maps?q=830+E+Vista+Way+Suite+221,+Vista,+CA+92084&output=embed"
+      loading="lazy"
+      allowfullscreen
+      referrerpolicy="no-referrer-when-downgrade"
+    ></iframe>
+  </section>
+</main>
+
+<div id="footer"></div>
+
+<!-- Popup Overlay -->
+<div id="popupOverlay" role="dialog" aria-modal="true" aria-labelledby="popupTitle">
+  <div id="popupContent">
+    <button id="popupCloseBtn" aria-label="Cerrar ventana emergente">&times;</button>
+    <img src="https://i.postimg.cc/QtMKKKpw/Light-Beige-and-Red-Modern-Fashion-Tips-Instagram-Post-1.png" alt="Imagen importante" />
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

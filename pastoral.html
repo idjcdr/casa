@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Galería – IDJ Casa de Refugio</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+</head>
+
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 900,
+    easing: 'ease-in-out',
+    once: true,
+    mirror: false
+  });
+</script>
+
+<body>
+
+<div id="header"></div>
+
+
+  <main>
+    <section class="split">
+      <h2 class="pastor-title">Pastores de la Iglesia</h2>
+      <div class="image-column">
+        <img src="https://i.postimg.cc/B6tz6nfD/IMG-6014.jpg" class="pastor-img" alt="Pastor Valentin Blancas" />
+      </div>
+      <div class="text-column">
+        <h2 class="pastor-title">Valentín y Sonia Blancas</h2>
+        <p>Bienvenidos a IDJ Casa de Refugio. Nuestros pastores llevan una visión de fe, restauración y comunidad, centrada en el amor de Cristo.</p>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact-section">
+      <h2>Contacto</h2>
+      <p>Te esperamos en:</p>
+      <p>
+        <strong>Teléfono:</strong> (760) 675-4847<br>
+        <strong>Correo:</strong> casaderefugio0724@gmail.com<br><br>
+        <strong>IDJ Casa De Refugio</strong><br>
+        830 East Vista Way, Suite 221<br>
+        Vista, California 92083, United States
+      </p>
+      <iframe src="https://www.google.com/maps?q=830+E+Vista+Way+Suite+221,+Vista,+CA+92083&amp;output=embed" loading="lazy"></iframe>
+    </section>
+  </main>
+
+  <div id="footer"></div>
+
+<script src="script.js"></script>
+
+  <script>
+    function toggleDropdown() {
+      const dropdown = document.getElementById("menuDropdown");
+      dropdown.classList.toggle("show");
+    }
+
+    function toggleLanguage() {
+      const isSpanish = document.documentElement.lang === "es";
+      document.documentElement.lang = isSpanish ? "en" : "es";
+
+      document.getElementById("nav-welcome").textContent = isSpanish ? "Welcome" : "Bienvenida";
+      document.getElementById("nav-pastor").textContent = isSpanish ? "Pastor" : "Pastor";
+      document.getElementById("nav-contact").textContent = isSpanish ? "Information" : "Información";
+      document.getElementById("nav-gallery").textContent = isSpanish ? "Gallery" : "Galería";
+      document.querySelector(".lang-btn").textContent = isSpanish ? "Español" : "English";
+
+      document.getElementById("nav-offering").innerHTML = `
+        <img src="https://cdn.iconscout.com/icon/free/png-256/venmo-2-569346.png" alt="Venmo" style="height: 20px;">
+        Ofrenda / Diezmo
+      `;
+
+      document.getElementById("slogan").textContent = isSpanish ? "Church Pastors" : "Pastores de la Iglesia";
+      document.querySelector(".pastor-title").textContent = isSpanish ? "Valentin & Sonia Blancas" : "Valentín y Sonia Blancas";
+
+      document.querySelector("#contact-section h2").textContent = isSpanish ? "Contact" : "Contacto";
+      document.querySelector("#contact-section p").textContent = isSpanish ? "Join us at:" : "Te esperamos en:";
+      document.querySelector("#contact-section p + p").innerHTML = isSpanish
+        ? `<strong>Phone:</strong> (760) 675-4847<br>
+           <strong>Email:</strong> casaderefugio0724@gmail.com<br><br>
+           <strong>IDJ Casa De Refugio</strong><br>
+           830 East Vista Way, Suite 221<br>
+           Vista, California 92083, United States`
+        : `<strong>Teléfono:</strong> (760) 675-4847<br>
+           <strong>Correo:</strong> casaderefugio0724@gmail.com<br><br>
+           <strong>IDJ Casa De Refugio</strong><br>
+           830 East Vista Way, Suite 221<br>
+           Vista, California 92083, United States`;
+    }
+
+    window.onclick = function(event) {
+      if (!event.target.closest('.dropdown')) {
+        document.getElementById("menuDropdown").classList.remove('show');
+      }
+    }
+  </script>
+  
+</body>
+</html>
