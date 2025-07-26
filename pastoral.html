@@ -31,7 +31,7 @@
       <div class="image-column">
         <img src="https://i.postimg.cc/B6tz6nfD/IMG-6014.jpg" class="pastor-img" alt="Pastor Valentin Blancas" />
       </div>
-      <div class="text-column">
+      <div class="text-column" id="Welcome">
         <h2 class="pastor-name">Valentín y Sonia Blancas</h2>
         <p>Bienvenidos a IDJ Casa de Refugio. Nuestros pastores llevan una visión de fe, restauración y comunidad, centrada en el amor de Cristo.</p>
       </div>
@@ -80,6 +80,9 @@
       document.getElementById("slogan").textContent = isSpanish ? "Vuelve a casa" : "Vuelve a casa";
       document.querySelector(".pastor-title").textContent = isSpanish ? "Pastors of the Church" : "Pastores de lla Iglesia";
       document.querySelector(".pastor-namee").textContent = isSpanish ? "Valentin & Sonia Blancas" : "Valentín y Sonia Blancas";
+      document.querySelector("welcome p").textContent = isSpanish ? "Welcome to IDJ House of Refuge. Our pastors carry a vision of faith, restoration, and community, centered on the love of Christ." : "Bienvenidos a IDJ Casa de Refugio. Nuestros pastores llevan una visión de fe, restauración y comunidad, centrada en el amor de Cristo.";
+
+
       document.querySelector("#contact-section h2").textContent = isSpanish ? "Contact" : "Contacto";
       document.querySelector("#contact-section p").textContent = isSpanish ? "Join us at:" : "Te esperamos en:";
       document.querySelector("#contact-section p + p").innerHTML = isSpanish
