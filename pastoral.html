@@ -3,30 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Galería – IDJ Casa de Refugio</title>
+  <title>Pastoral – IDJ Casa de Refugio</title>
+
+  <!-- Styles -->
   <link rel="stylesheet" href="style.css">
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
 </head>
-
-<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-<script>
-  AOS.init({
-    duration: 900,
-    easing: 'ease-in-out',
-    once: true,
-    mirror: false
-  });
-</script>
-
 <body>
 
-<div id="header"></div> 
-><section> 
-  <div class="text-colum">
-    <center><h1 class="pastor-title">Pastores de la Iglesia</h1></center>
+  <!-- Header Placeholder -->
+  <div id="header"></div>
 
-
+  <!-- Main Content -->
   <main>
+    <section>
+      <div class="text-column">
+        <center><h1 class="pastor-title">Pastores de la Iglesia</h1></center>
+      </div>
+    </section>
+
     <section class="split">
       <div class="image-column">
         <img src="https://i.postimg.cc/B6tz6nfD/IMG-6014.jpg" class="pastor-img" alt="Pastor Valentin Blancas" />
@@ -48,13 +43,28 @@
         830 East Vista Way, Suite 221<br>
         Vista, California 92083, United States
       </p>
-      <iframe src="https://www.google.com/maps?q=830+E+Vista+Way+Suite+221,+Vista,+CA+92083&amp;output=embed" loading="lazy"></iframe>
+      <iframe
+        src="https://www.google.com/maps?q=830+E+Vista+Way+Suite+221,+Vista,+CA+92083&amp;output=embed"
+        loading="lazy"
+      ></iframe>
     </section>
   </main>
 
+  <!-- Footer Placeholder -->
   <div id="footer"></div>
 
-<script src="script.js"></script>
-  
+  <!-- AOS Animation -->
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 900,
+      easing: 'ease-in-out',
+      once: true,
+      mirror: false
+    });
+  </script>
+
+  <!-- Load site logic -->
+  <script src="script.js"></script>
 </body>
 </html>
