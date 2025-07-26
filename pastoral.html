@@ -20,7 +20,10 @@
 
 <body>
 
-<div id="header"></div>
+<div id="header"></div> 
+><section> 
+  <div class="text-colum">
+    <center><h1 class="pastor-title">Pastores de la Iglesia</h1></center>
 
 
   <main>
@@ -29,7 +32,7 @@
         <img src="https://i.postimg.cc/B6tz6nfD/IMG-6014.jpg" class="pastor-img" alt="Pastor Valentin Blancas" />
       </div>
       <div class="text-column">
-        <h2 class="pastor-title">Valentín y Sonia Blancas</h2>
+        <h2 class="pastor-name">Valentín y Sonia Blancas</h2>
         <p>Bienvenidos a IDJ Casa de Refugio. Nuestros pastores llevan una visión de fe, restauración y comunidad, centrada en el amor de Cristo.</p>
       </div>
     </section>
@@ -74,8 +77,9 @@
         Ofrenda / Diezmo
       `;
 
-      document.getElementById("slogan").textContent = isSpanish ? "Church Pastors" : "Return home";
-      document.querySelector(".pastor-title").textContent = isSpanish ? "Valentin & Sonia Blancas" : "Valentín y Sonia Blancas";
+      document.getElementById("slogan").textContent = isSpanish ? "Vuelve a casa" : "Vuelve a casa";
+      document.querySelector(".pastor-title").textContent = isSpanish ? "Pastors of the Church" : "Pastores de lla Iglesia";
+      document.querySelector(".pastor-namee").textContent = isSpanish ? "Valentin & Sonia Blancas" : "Valentín y Sonia Blancas";
 
       document.querySelector("#contact-section h2").textContent = isSpanish ? "Contact" : "Contacto";
       document.querySelector("#contact-section p").textContent = isSpanish ? "Join us at:" : "Te esperamos en:";
