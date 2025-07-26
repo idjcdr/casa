@@ -206,9 +206,6 @@ function toggleLanguage() {
 
   const pastorName = document.querySelector(".pastor-name");
   if (pastorName) pastorName.textContent = newLang === "en" ? "Valentin & Sonia Blancas" : "Valentín y Sonia Blancas";
-  
-  const unpacto = document.querySelector(".unpacto");
-  if (unpacto) unpacto.textContent = newLang === "en" ? "A Pact not a Contract" : "Un Pacto no un Contrato";
 
   const welcomePara = document.querySelector("#Welcome p");
   if (welcomePara) {
@@ -236,5 +233,33 @@ function toggleLanguage() {
          <strong>IDJ Casa De Refugio</strong><br>
          830 East Vista Way, Suite 221<br>
          Vista, California 92083, United States`;
+  }
+}
+
+
+function translateGalleryPage() {
+  const currentLang = document.documentElement.lang;
+  const newLang = currentLang === "es" ? "en" : "es";
+  document.documentElement.lang = newLang;
+  localStorage.setItem("lang", newLang);
+
+  // Update language toggle button text
+  const langBtn = document.querySelector(".lang-btn");
+  if (langBtn) langBtn.textContent = newLang === "en" ? "Español" : "English";
+
+  // Translate gallery heading
+  const galleryHeading = document.querySelector("#unpacto h2");
+  if (galleryHeading) {
+    galleryHeading.textContent = newLang === "en"
+      ? "A COVENANT NOT A CONTRACT"
+      : "UN PACTO NO UN CONTRATO";
+  }
+
+  // (Optional) Translate image alt texts
+  const galleryImages = document.querySelectorAll("#unpacto img");
+  if (galleryImages.length) {
+    galleryImages[0].alt = newLang === "en" ? "Covenant image 1" : "Descripción 1";
+    galleryImages[1].alt = newLang === "en" ? "Covenant image 2" : "Descripción 2";
+    galleryImages[2].alt = newLang === "en" ? "Covenant image 3" : "Descripción 3";
   }
 }
