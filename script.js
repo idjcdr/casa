@@ -1,3 +1,22 @@
+// =================== Header & Footer ===================
+
+// Load Header
+fetch('header.html')
+  .then(res => res.text())
+  .then(html => {
+    document.getElementById('header').innerHTML = html;
+    setupMenuAndLanguageToggle();
+  });
+
+// Load Footer
+fetch('footer.html')
+  .then(res => res.text())
+  .then(html => {
+    document.getElementById('footer').innerHTML = html;
+  });
+
+// =================== Language Translations ===================
+
 const translations = {
   es: {
     langBtn: "English",
@@ -19,30 +38,7 @@ const translations = {
                      830 East Vista Way, Suite 221<br>
                      Vista, California 92083, United States`,
     maintenanceHeading: "Actualmente estamos en mantenimiento.<br /> Es posible que algunas páginas o el sitio web completo no sean 100% funcionales o estén disponibles.<br /> Vuelva pronto.",
-    enlargedImageAlt: "Imagen ampliada",
-
-    // PRIVACY POLICY
-    ppTitle: "I.D.J. Casa de Refugio INC.",
-    ppSubtitle: "Acuerdo de Política de Privacidad en Línea",
-    ppDate: "Fecha de Vigencia: 7 de enero de 2024",
-    ppIntro1: "I.D.J. Casa de Refugio INC. (“IDJ CDR,” “nosotros,” “nos,” o “nuestro”) está comprometido a proteger su privacidad. Esta Política de Privacidad describe cómo recopilamos, usamos, divulgamos y protegemos su información cuando visita nuestro sitio web ",
-    ppIntroLink: "idjcasaderefugio.com",
-    ppIntro2: " o utiliza cualquiera de nuestros servicios en línea.",
-    ppIntro3: "Al acceder o utilizar nuestro sitio web, usted acepta la recopilación y el uso de su información de acuerdo con esta Política de Privacidad. Si no está de acuerdo con los términos de esta política, por favor deje de usar nuestro sitio y servicios.",
-    pp1: "1. Información que recopilamos",
-    pp2: "2. Cómo usamos su información",
-    pp3: "3. Compartir su información",
-    pp4: "4. Seguridad de su información",
-    pp5: "5. Sus derechos de privacidad",
-    pp6: "6. Cookies y tecnologías de seguimiento",
-    pp7: "7. Servicios de terceros",
-    pp8: "8. Retención de datos",
-    pp9: "9. Privacidad de los niños",
-    pp10: "10. Cambios a esta política",
-    pp11: "11. Ley aplicable",
-    pp12: "12. Consentimiento",
-    pp13: "13. Cómo contactarnos",
-    ppRight: "Todos los derechos reservados. I.D.J. Casa de Refugio INC."
+    enlargedImageAlt: "Imagen ampliada"
   },
   en: {
     langBtn: "Español",
@@ -64,48 +60,24 @@ const translations = {
                      830 East Vista Way, Suite 221<br>
                      Vista, California 92083, United States`,
     maintenanceHeading: "We are currently undergoing maintenance.<br /> Some pages or the entire website may not be fully functional or available.<br /> Please check back soon.",
-    enlargedImageAlt: "Enlarged Image",
-
-    // PRIVACY POLICY
-    ppTitle: "I.D.J. Casa de Refugio INC.",
-    ppSubtitle: "Online Privacy Policy Agreement",
-    ppDate: "Effective Date: January 7, 2024",
-    ppIntro1: "I.D.J. Casa de Refugio INC. (“IDJ CDR,” “we,” “us,” or “our”) is committed to protecting your privacy. This Privacy Policy outlines how we collect, use, disclose, and safeguard your information when you visit our website ",
-    ppIntroLink: "idjcasaderefugio.com",
-    ppIntro2: " or utilize any of our online services.",
-    ppIntro3: "By accessing or using our website, you agree to the collection and use of your information in accordance with this Privacy Policy. If you do not agree with the terms of this policy, please discontinue use of our site and services.",
-    pp1: "1. Information We Collect",
-    pp2: "2. How We Use Your Information",
-    pp3: "3. Sharing Your Information",
-    pp4: "4. Security of Your Information",
-    pp5: "5. Your Privacy Rights",
-    pp6: "6. Cookies and Tracking Technologies",
-    pp7: "7. Third-Party Services",
-    pp8: "8. Data Retention",
-    pp9: "9. Children's Privacy",
-    pp10: "10. Changes to This Policy",
-    pp11: "11. Governing Law",
-    pp12: "12. Consent",
-    pp13: "13. Contacting Us",
-    ppRight: "All rights reserved. I.D.J. Casa de Refugio INC."
+    enlargedImageAlt: "Enlarged Image"
   }
 };
 
-let currentLang = document.documentElement.lang || "es";
+let currentLang = document.documentElement.lang || 'es';
 
 function setLanguage(lang) {
-  const t = translations[lang];
-  if (!t) return;
-
+  if (!translations[lang]) return;
   currentLang = lang;
   document.documentElement.lang = lang;
 
+  const t = translations[lang];
   const update = (selector, content, isHTML = false) => {
     const el = document.querySelector(selector);
-    if (el) isHTML ? (el.innerHTML = content) : (el.textContent = content);
+    if (el) isHTML ? el.innerHTML = content : el.textContent = content;
   };
 
-  // NAVIGATION + MAIN PAGE
+  // Global site elements
   update("#nav-welcome", t.navWelcome);
   update("#nav-pastor", t.navPastor);
   update("#nav-contact", t.navContact);
@@ -124,60 +96,110 @@ function setLanguage(lang) {
   const lightboxImg = document.querySelector(".lightbox-img");
   if (lightboxImg) lightboxImg.alt = t.enlargedImageAlt;
 
-  // PRIVACY POLICY TRANSLATIONS
-  update("#pp-title", t.ppTitle);
-  update("#pp-subtitle", t.ppSubtitle);
-  update("#pp-date", t.ppDate);
-  update("#pp-intro-1", t.ppIntro1);
-  update("#pp-intro-link", t.ppIntroLink);
-  update("#pp-intro-2", t.ppIntro2);
-  update("#pp-intro-3", t.ppIntro3);
-  update("#pp1", t.pp1);
-  update("#pp2", t.pp2);
-  update("#pp3", t.pp3);
-  update("#pp4", t.pp4);
-  update("#pp5", t.pp5);
-  update("#pp6", t.pp6);
-  update("#pp7", t.pp7);
-  update("#pp8", t.pp8);
-  update("#pp9", t.pp9);
-  update("#pp10", t.pp10);
-  update("#pp11", t.pp11);
-  update("#pp12", t.pp12);
-  update("#pp13", t.pp13);
-  update("#pp-right", t.ppRight);
-
-  // LANGUAGE BUTTON
   const langBtn = document.querySelector(".lang-btn");
   if (langBtn) langBtn.textContent = t.langBtn;
+
+  // Add privacy-specific translation if present
+  if (typeof translatePrivacyPolicy === 'function') {
+    translatePrivacyPolicy(lang);
+  }
 }
 
 function toggleLanguage() {
-  const newLang = currentLang === "es" ? "en" : "es";
+  const newLang = currentLang === 'es' ? 'en' : 'es';
   setLanguage(newLang);
 }
 
+function setupMenuAndLanguageToggle() {
+  const menuBtn = document.getElementById("menuButton");
+  const dropdown = document.getElementById("menuDropdown");
+  const langToggleBtn = document.getElementById("langToggleBtn");
+
+  menuBtn?.addEventListener("click", () => {
+    dropdown?.classList.toggle("show");
+    const expanded = menuBtn.getAttribute("aria-expanded") === "true";
+    menuBtn.setAttribute("aria-expanded", String(!expanded));
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest(".dropdown")) {
+      dropdown?.classList.remove("show");
+      menuBtn?.setAttribute("aria-expanded", "false");
+    }
+  });
+
+  langToggleBtn?.addEventListener("click", toggleLanguage);
+
+  // Optional floating toggle (for other pages)
+  const toggleBtn = document.createElement("button");
+  toggleBtn.textContent = translations[currentLang].langBtn;
+  toggleBtn.className = "lang-btn";
+  Object.assign(toggleBtn.style, {
+    position: "fixed", top: "10px", right: "10px", zIndex: "1000"
+  });
+  document.body.appendChild(toggleBtn);
+  toggleBtn.addEventListener("click", toggleLanguage);
+
+  // Set language on load
+  setLanguage(currentLang);
+}
+
+// =================== Lightbox ===================
+
 document.addEventListener("DOMContentLoaded", () => {
-  if (!document.querySelector(".lang-btn")) {
-    const toggleBtn = document.createElement("button");
-    toggleBtn.textContent = translations[currentLang].langBtn;
-    toggleBtn.className = "lang-btn";
-    Object.assign(toggleBtn.style, {
-      position: "fixed",
-      top: "10px",
-      right: "10px",
-      zIndex: "1000",
-      padding: "6px 12px",
-      fontSize: "14px",
-      border: "none",
-      backgroundColor: "#444",
-      color: "#fff",
-      borderRadius: "4px",
-      cursor: "pointer"
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.querySelector(".lightbox-img");
+  const closeBtn = document.querySelector(".lightbox-close");
+
+  document.querySelectorAll(".gallery img").forEach(img => {
+    img.addEventListener("click", () => {
+      if (lightbox) {
+        lightbox.style.display = "flex";
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+      }
     });
-    document.body.appendChild(toggleBtn);
-    toggleBtn.addEventListener("click", toggleLanguage);
+  });
+
+  closeBtn?.addEventListener("click", () => lightbox.style.display = "none");
+  lightbox?.addEventListener("click", (e) => {
+    if (e.target === lightbox) lightbox.style.display = "none";
+  });
+});
+
+// =================== Popup & AOS ===================
+
+document.addEventListener("DOMContentLoaded", () => {
+  const popupOverlay = document.getElementById('popupOverlay');
+  const popupCloseBtn = document.getElementById('popupCloseBtn');
+
+  if (window.AOS) {
+    AOS.init({ duration: 900, easing: 'ease-in-out', once: true });
   }
 
-  setLanguage(currentLang);
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      if (popupOverlay && popupCloseBtn) {
+        popupOverlay.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        popupCloseBtn.focus();
+      }
+    }, 10000);
+  });
+
+  const closePopup = () => {
+    popupOverlay.style.display = 'none';
+    document.body.style.overflow = '';
+  };
+
+  popupCloseBtn?.addEventListener('click', closePopup);
+  popupOverlay?.addEventListener('click', e => {
+    if (e.target === popupOverlay) closePopup();
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && popupOverlay?.style.display === 'flex') {
+      closePopup();
+    }
+  });
 });
