@@ -242,10 +242,51 @@ function toggleLanguage() {
          Vista, California 92083, United States`;
   }
 }
- const maintenance = document.querySelector("#maint h2");
-  if (maintenance) {
-    maintenance.textContent = newLang === "en"
-      ? "We are currently undergoing maintenance.<br /> Some pages or the full website might not be 100% functional or available. <br /> Please check back soon."
-      : "Actualmente estamos en mantenimiento.<br /> Es posible que algunas páginas o el sitio web completo no sean 100% funcionales o estén disponibles.<br /> Vuelva pronto.";
 
+// Define translations
+const translations = {
+  es: {
+    maintenanceHeading: "Actualmente estamos en mantenimiento.<br /> Es posible que algunas páginas o el sitio web completo no sean 100% funcionales o estén disponibles.<br /> Vuelva pronto.",
+    enlargedImageAlt: "Imagen ampliada"
+  },
+  en: {
+    maintenanceHeading: "We are currently undergoing maintenance.<br /> Some pages or the entire website may not be fully functional or available.<br /> Please check back soon.",
+    enlargedImageAlt: "Enlarged Image"
   }
+};
+
+// Current language (default: Spanish)
+let currentLang = 'es';
+
+// Translation logic
+function setLanguage(lang) {
+  if (!translations[lang]) return;
+  currentLang = lang;
+
+  // Translate maintenance heading
+  const maintHeading = document.querySelector("#maint h2");
+  if (maintHeading) {
+    maintHeading.innerHTML = translations[lang].maintenanceHeading;
+  }
+
+  // Translate lightbox image alt
+  const lightboxImg = document.querySelector(".lightbox-img");
+  if (lightboxImg) {
+    lightboxImg.alt = translations[lang].enlargedImageAlt;
+  }
+}
+
+// Optional: Language toggle button
+document.addEventListener("DOMContentLoaded", () => {
+  const toggleBtn = document.createElement("button");
+  toggleBtn.textContent = "EN / ES";
+  toggleBtn.style.position = "fixed";
+  toggleBtn.style.top = "10px";
+  toggleBtn.style.right = "10px";
+  toggleBtn.style.zIndex = "1000";
+  document.body.appendChild(toggleBtn);
+
+  toggleBtn.addEventListener("click", () => {
+    setLanguage(currentLang === 'es' ? 'en' : 'es');
+  });
+});
