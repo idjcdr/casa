@@ -275,18 +275,3 @@ function setLanguage(lang) {
     lightboxImg.alt = translations[lang].enlargedImageAlt;
   }
 }
-
-// Optional: Language toggle button
-document.addEventListener("DOMContentLoaded", () => {
-  const toggleBtn = document.createElement("button");
-  toggleBtn.textContent = "EN / ES";
-  toggleBtn.style.position = "fixed";
-  toggleBtn.style.top = "10px";
-  toggleBtn.style.right = "10px";
-  toggleBtn.style.zIndex = "1000";
-  document.body.appendChild(toggleBtn);
-
-  toggleBtn.addEventListener("click", () => {
-    setLanguage(currentLang === 'es' ? 'en' : 'es');
-  });
-});
