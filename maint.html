@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Galería – IDJ Casa de Refugio</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+</head>
+
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 900,
+    easing: 'ease-in-out',
+    once: true,
+    mirror: false
+  });
+</script>
+
+<body>
+
+<div id="header"></div>
+
+<body>
+  <div class="maintenance-message">
+    We are currently undergoing maintenance.<br />
+    Please check back soon.
+  </div>
+</body>
+
+<div id="footer"></div>
+
+<!-- Popup Overlay -->
+<div id="popupOverlay" role="dialog" aria-modal="true" aria-labelledby="popupTitle">
+  <div id="popupContent">
+    <button id="popupCloseBtn" aria-label="Cerrar ventana emergente">&times;</button>
+    <img src="https://i.postimg.cc/QtMKKKpw/Light-Beige-and-Red-Modern-Fashion-Tips-Instagram-Post-1.png" alt="Imagen importante" />
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+
+<style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #F5F1E9;
+      font-family: Arial, sans-serif;
+    }
+    .maintenance-message {
+      font-size: 4rem;
+      font-weight: bold;
+      color: #333;
+      text-align: center;
+      padding: 20px;
+      border: 4px solid #333;
+      border-radius: 15px;
+      background-color: #fff;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      max-width: 90vw;
+    }
+
+    /* Ensure full-page elements don't cause overflow */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  font-family: sans-serif;
+}
+
+  </style>
+
+</html>
