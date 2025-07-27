@@ -16,6 +16,39 @@
     once: true,
     mirror: false
   });
+
+  const translations = {
+  es: {
+    maintenanceMessage: `Actualmente estamos en mantenimiento.<br />
+      Es posible que algunas páginas o el sitio web completo no sean 100% funcionales o estén disponibles.<br />
+      Vuelva pronto.`
+  },
+  en: {
+    maintenanceMessage: `We are currently under maintenance.<br />
+      Some pages or the entire website may not be 100% functional or available.<br />
+      Please come back soon.`
+  }
+};
+
+function updateLanguage(lang) {
+  const maintenanceSection = document.querySelector('#maint h2');
+  maintenanceSection.innerHTML = translations[lang].maintenanceMessage;
+}
+
+// Attach event listener to your dropdown links
+document.querySelectorAll('#language-dropdown a').forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    const selectedLang = link.getAttribute('data-lang');
+    updateLanguage(selectedLang);
+    // Optionally update button text to show selected language
+    document.getElementById('lang-btn').textContent = link.textContent + ' ▼';
+  });
+});
+
+// Initialize with Spanish by default
+updateLanguage('es');
+
 </script>
 <body>
 
@@ -38,6 +71,8 @@
   <img class="lightbox-img" src="" alt="Enlarged Image">
 </div>
 
+
 </body>
 </html>
+
 
