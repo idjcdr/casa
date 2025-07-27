@@ -17,67 +17,27 @@
     mirror: false
   });
 </script>
-
 <body>
 
 <div id="header"></div>
 
-<body>
-  <div class="maintenance-message" id="maint">
-    We are currently undergoing maintenance.<br />
-    Some pages or the full website might not be 100% functional or available.<br />
-    Please check back soon.
-  </div>
-</body>
 
-<div id="footer"></div>
+  <section class="maintenance" id="maint">
+    <h2>We are currently undergoing maintenance.<br /> 
+        Some pages or the full website might not be 100% functional or available. <br /> 
+        Please check back soon.</h2>
+  </section>
 
-<!-- Popup Overlay -->
-<div id="popupOverlay" role="dialog" aria-modal="true" aria-labelledby="popupTitle">
-  <div id="popupContent">
-    <button id="popupCloseBtn" aria-label="Cerrar ventana emergente">&times;</button>
-    <img src="https://i.postimg.cc/QtMKKKpw/Light-Beige-and-Red-Modern-Fashion-Tips-Instagram-Post-1.png" alt="Imagen importante" />
-  </div>
-</div>
+  <div id="footer"></div>
 
 <script src="script.js"></script>
+
+  <!-- Lightbox Popup Container -->
+<div id="lightbox" class="lightbox">
+  <span class="lightbox-close">&times;</span>
+  <img class="lightbox-img" src="" alt="Enlarged Image">
+</div>
+
 </body>
-
-<style>
-    body, html {
-      height: 100%;
-      margin: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: #F5F1E9;
-      font-family: Arial, sans-serif;
-    }
-    .maintenance-message {
-      
-      font-weight: bold;
-      color: #333;
-      text-align: center;
-      padding: 20px;
-      border: 4px solid #333;
-      border-radius: 15px;
-      background-color: #fff;
-      box-shadow: 0 0 15px rgba(0,0,0,0.1);
-      max-width: 90vw;
-    }
-
-    /* Ensure full-page elements don't cause overflow */
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-  font-family: sans-serif;
-}
-
-  </style>
-
 </html>
+
