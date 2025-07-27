@@ -1,43 +1,150 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Galería – IDJ Casa de Refugio</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <title>IDJ Casa de Refugio</title>
+  <style>
+    /* Optional: you can style the fixed language button here if needed */
+  </style>
 </head>
-
-<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-<script>
-  AOS.init({
-    duration: 900,
-    easing: 'ease-in-out',
-    once: true,
-    mirror: false
-  });
-</script>
 <body>
+  <div id="header"></div>
 
-<div id="header"></div>
-
-
-  <section class="maintenance" id="maint">
-    <h2>We are currently undergoing maintenance.<br /> 
-        Some pages or the full website might not be 100% functional or available. <br /> 
-        Please check back soon.</h2>
-  </section>
+  <!-- Your main content here -->
 
   <div id="footer"></div>
 
-<script src="script.js"></script>
+  <script>
+    // Load header and then bind menu + language logic
+    fetch('header.html')
+      .then(response => response.text())
+      .then(html => {
+        document.getElementById('header').innerHTML = html;
 
-  <!-- Lightbox Popup Container -->
-<div id="lightbox" class="lightbox">
-  <span class="lightbox-close">&times;</span>
-  <img class="lightbox-img" src="" alt="Enlarged Image">
-</div>
+        const menuBtn = document.getElementById("menuButton");
+        const dropdown = document.getElementById("menuDropdown");
+        const langToggleBtn = document.getElementById("langToggleBtn");
+        let isEnglish = false;
 
+        menuBtn?.addEventListener("click", () => {
+          dropdown?.classList.toggle("show");
+          const expanded = menuBtn.getAttribute("aria-expanded") === "true";
+          menuBtn.setAttribute("aria-expanded", String(!expanded));
+        });
+
+        document.addEventListener("click", (e) => {
+          if (!e.target.closest(".dropdown")) {
+            dropdown?.classList.remove("show");
+            menuBtn?.setAttribute("aria-expanded", "false");
+          }
+        });
+
+        langToggleBtn?.addEventListener("click", () => {
+          isEnglish = !isEnglish;
+          const lang = isEnglish ? 'en' : 'es';
+          setLanguage(lang);
+          langToggleBtn.textContent = isEnglish ? 'Español' : 'English';
+        });
+      });
+
+    // Load footer
+    fetch('footer.html')
+      .then(response => response.text())
+      .then(html => {
+        document.getElementById('footer').innerHTML = html;
+      });
+
+    // Popup & AOS
+    document.addEventListener("DOMContentLoaded", () => {
+      const popupOverlay = document.getElementById('popupOverlay');
+      const popupCloseBtn = document.getElementById('popupCloseBtn');
+
+      if (window.AOS) {
+        AOS.init({ duration: 900, easing: 'ease-in-out', once: true, mirror: false });
+      }
+
+      window.addEventListener('load', () => {
+        setTimeout(() => {
+          if (!popupOverlay || !popupCloseBtn) return;
+          popupOverlay.style.display = 'flex';
+          document.body.style.overflow = 'hidden';
+          popupCloseBtn.focus();
+        }, 10000);
+      });
+
+      function closePopup() {
+        if (!popupOverlay) return;
+        popupOverlay.style.display = 'none';
+        document.body.style.overflow = '';
+      }
+
+      popupCloseBtn?.addEventListener('click', closePopup);
+      popupOverlay?.addEventListener('click', (e) => {
+        if (e.target === popupOverlay) closePopup();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && popupOverlay?.style.display === 'flex') {
+          closePopup();
+        }
+      });
+    });
+
+    // Lightbox
+    document.addEventListener("DOMContentLoaded", function () {
+      const lightbox = document.getElementById("lightbox");
+      const lightboxImg = document.querySelector(".lightbox-img");
+      const closeBtn = document.querySelector(".lightbox-close");
+
+      document.querySelectorAll(".gallery img").forEach(img => {
+        img.addEventListener("click", function () {
+          lightbox.style.display = "flex";
+          lightboxImg.src = this.src;
+          lightboxImg.alt = this.alt;
+        });
+      });
+
+      closeBtn?.addEventListener("click", function () {
+        lightbox.style.display = "none";
+      });
+
+      lightbox?.addEventListener("click", function (e) {
+        if (e.target === lightbox) {
+          lightbox.style.display = "none";
+        }
+      });
+    });
+
+    // Translations
+    const translations = {
+      es: {
+        maintenanceHeading: "Actualmente estamos en mantenimiento.<br /> Es posible que algunas páginas o el sitio web completo no sean 100% funcionales o estén disponibles.<br /> Vuelva pronto.",
+        enlargedImageAlt: "Imagen ampliada"
+      },
+      en: {
+        maintenanceHeading: "We are currently undergoing maintenance.<br /> Some pages or the entire website may not be fully functional or available.<br /> Please check back soon.",
+        enlargedImageAlt: "Enlarged Image"
+      }
+    };
+
+    let currentLang = 'es';
+
+    function setLanguage(lang) {
+      if (!translations[lang]) return;
+      currentLang = lang;
+      document.documentElement.lang = lang;
+
+      const maintHeading = document.querySelector("#maint h2");
+      if (maintHeading) {
+        maintHeading.innerHTML = translations[lang].maintenanceHeading;
+      }
+
+      const lightboxImg = document.querySelector(".lightbox-img");
+      if (lightboxImg) {
+        lightboxImg.alt = translations[lang].enlargedImageAlt;
+      }
+    }
+    });
+  </script>
 </body>
 </html>
-
