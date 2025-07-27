@@ -215,6 +215,12 @@ function toggleLanguage() {
   const pastorName = document.querySelector(".pastor-name");
   if (pastorName) pastorName.textContent = newLang === "en" ? "Valentin & Sonia Blancas" : "Valentín y Sonia Blancas";
 
+   const maint = document.querySelector(".maint");
+  if (maint) 
+    maint.textContent = newLang === "en" 
+       ? "We are currently undergoing maintenance.<br /> Some pages or the full website might not be 100% functional or available. <br /> Please check back soon." 
+     : "Actualmente estamos en mantenimiento.<br /> Es posible que algunas páginas o el sitio web completo no sean 100% funcionales o estén disponibles.<br /> Vuelva pronto.";
+
   const welcomePara = document.querySelector("#Welcome p");
   if (welcomePara) {
     welcomePara.textContent = newLang === "en"
