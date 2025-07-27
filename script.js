@@ -205,6 +205,7 @@ function toggleLanguage() {
       ? "A COVENANT NOT A CONTRACT"
       : "UN PACTO NO UN CONTRATO";
   }
+
   const slogan = document.getElementById("slogan");
   if (slogan) slogan.textContent = newLang === "en" ? "Vuelve a Casa" : "Vuelve a Casa";
 
