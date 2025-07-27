@@ -205,9 +205,9 @@ function toggleLanguage() {
       ? "A COVENANT NOT A CONTRACT"
       : "UN PACTO NO UN CONTRATO";
   }
-  const sectionHeading = document.querySelector("#maint h2");
-  if (sectionHeading) {
-    sectionHeading.textContent = newLang === "en"
+  const maintHeading = document.querySelector("#maint h2");
+  if (maintHeading) {
+    maintHeading.textContent = newLang === "en"
       ? "We are currently undergoing maintenance. Some pages or the full website might not be 100% functional or available. Please check back soon."
       : "Actualmente estamos en mantenimiento. Es posible que algunas páginas o el sitio web completo no sean 100% funcionales o estén disponibles. Vuelva pronto.";
   }
