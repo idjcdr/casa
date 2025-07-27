@@ -1,464 +1,294 @@
-* {
-  box-sizing: border-box;
-}
+// Load header and then bind menu + language logic
+fetch('header.html')
+  .then(response => response.text())
+  .then(html => {
+    document.getElementById('header').innerHTML = html;
 
-/* Reset and base */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+    const menuBtn = document.getElementById("menuButton");
+    const dropdown = document.getElementById("menuDropdown");
+    const langToggleBtn = document.getElementById("langToggleBtn");
+    let isEnglish = false;
 
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #F5F1E9;
-  color: #333;
-  line-height: 1.6;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
+    // Dropdown toggle
+    menuBtn?.addEventListener("click", () => {
+      dropdown?.classList.toggle("show");
+      const expanded = menuBtn.getAttribute("aria-expanded") === "true";
+      menuBtn.setAttribute("aria-expanded", String(!expanded));
+    });
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
+    // Close dropdown when clicking outside
+    document.addEventListener("click", (e) => {
+      if (!e.target.closest(".dropdown")) {
+        dropdown?.classList.remove("show");
+        menuBtn?.setAttribute("aria-expanded", "false");
+      }
+    });
 
-/* NAVIGATION */
-nav {
-  background: #4B3B2B;
-  padding: 5px 30px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
-}
+    // Language toggle
+    langToggleBtn?.addEventListener("click", () => {
+      isEnglish = !isEnglish;
+      langToggleBtn.textContent = isEnglish ? 'Español' : 'English';
 
-nav img {
-  height: 70px;
-  user-select: none;
-}
+      const setText = (id, text) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = text;
+      };
 
-.nav-right {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
+      const setHTML = (id, html) => {
+        const el = document.getElementById(id);
+        if (el) el.innerHTML = html;
+      };
 
-.live-btn {
-  background-color: #e03e3e;
-  color: white;
-  font-weight: 600;
-  font-size: 16px;
-  border: none;
-  border-radius: 6px;
-  padding: 12px 20px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  user-select: none;
-  margin-left: 20px;
-}
+      // Header
+      setText('header-title', isEnglish ? 'IDJ House of Refuge' : 'IDJ Casa de Refugio');
+      setText('header-subtitle', isEnglish ? 'Vuelve a Casa' : 'Vuelve a Casa');
 
-.live-btn:hover {
-  background-color: #b82b2b;
-}
+      // Nav
+      setText('nav-welcome', isEnglish ? 'Welcome' : 'Bienvenida');
+      setText('nav-pastor', 'Pastor');
+      setText('nav-contact', isEnglish ? 'Information' : 'Información');
+      setText('nav-gallery', isEnglish ? 'Gallery' : 'Galería');
 
-/* Dropdown Menu */
-.dropdown {
-  position: relative;
-}
+      // Vision
+      setText('vision-title', isEnglish ? 'Church Vision' : 'Visión de la Iglesia');
+      setText('vision-text', isEnglish
+        ? 'Our mission is to transform communities and lead others to Christ. We are a community seeking to glorify God by giving ourselves to Jesus.'
+        : 'Nuestra misión es transformar comunidades y llevar a otros hacia Cristo. Somos una comunidad que busca glorificar a Dios entregándonos a Jesús.'
+      );
 
-.dropbtn {
-  background-color: #4B3B2B;
-  color: white;
-  padding: 20px 30px;
-  font-size: 20px;
-  border: none;
-  cursor: pointer;
-  font-weight: bold;
-  border-radius: 8px;
-  transition: background-color 0.3s ease;
-}
+      // Schedule
+      setText('schedule-title', isEnglish ? 'Service Schedule' : 'Horarios de Servicios');
+      setHTML('schedule-list', isEnglish
+        ? `<li><strong>Sunday:</strong></li><li>General Service - 4:30 PM</li>
+           <li><strong>Tuesday:</strong></li><li>Bible Study - 7:00 PM</li>`
+        : `<li><strong>Domingo:</strong></li><li>Servicio General - 4:30 PM</li>
+           <li><strong>Martes:</strong></li><li>Estudio Bíblico - 7:00 PM</li>`
+      );
 
-.dropbtn:hover {
-  background-color: #4B3B2B;
-}
+      // Pastor message
+      setText('pastor-message-title', isEnglish ? "Pastor's Message" : 'Mensaje del Pastor');
+      setHTML('pastor-message-text', isEnglish
+        ? `"Our desire is that everyone who walks through our doors experiences the love of Christ and receives the restoration that only He can give. We invite you to be part of this family of faith."<br /><br /> — Pastor Valentin Blancas`
+        : `"Nuestro deseo es que cada persona que entre por nuestras puertas experimente el amor de Cristo y reciba la restauración que solo Él puede dar. Te invitamos a formar parte de esta familia de fe."<br /><br /> — Pastor Valentin Blancas`
+      );
 
-.dropdown-content {
-  max-height: 0;
-  opacity: 0;
-  overflow: hidden;
-  pointer-events: none;
-  transition: max-height 0.4s ease, opacity 0.4s ease;
-  background-color: #4B3B2B;
-  position: absolute;
-  right: 0;
-  top: 40px;
-  min-width: 240px;
-  border-radius: 5px;
-  z-index: 1000;
-}
+      // Contact
+      setText('contact-title', isEnglish ? 'Contact' : 'Contacto');
+      setHTML('contact-list', isEnglish
+        ? `<li><strong>📍Address:</strong></li><li>830 E Vista Way, Suite 221, Vista, CA 92084</li>
+           <li><strong>📞 Phone:</strong></li><li>(760) 675-4847</li>
+           <li><strong>📧 Email:</strong></li><li>casaderefugio0724@gmail.com</li>`
+        : `<li><strong>📍Dirección:</strong></li><li>830 E Vista Way, Suite 221, Vista, CA 92084</li>
+           <li><strong>📞 Teléfono:</strong></li><li>(760) 675-4847</li>
+           <li><strong>📧 Correo:</strong></li><li>casaderefugio0724@gmail.com</li>`
+      );
 
-.dropdown-content.show {
-  max-height: 500px;
-  opacity: 1;
-  pointer-events: auto;
-}
+      // Footer
+      setText('footer-privacy', 'Privacy Policy');
+      setText('footer-prayer', isEnglish ? 'Prayer' : 'Oracion/Prayer');
+      setText('footer-church-info', 'Church Filing Info');
+    });
+  });
 
-.dropdown-content a,
-.dropdown-content .lang-btn {
-  color: white;
-  padding: 14px 20px;
-  display: block;
-  background: none;
-  text-align: left;
-  border: none;
-  font-size: 16px;
-  cursor: pointer;
-}
+// Load footer
+fetch('footer.html')
+  .then(response => response.text())
+  .then(html => {
+    document.getElementById('footer').innerHTML = html;
+  });
 
-.dropdown-content a:hover,
-.dropdown-content .lang-btn:hover {
-  background-color: #4B3B2B;
-}
+// Handle popup & animations
+document.addEventListener("DOMContentLoaded", () => {
+  const popupOverlay = document.getElementById('popupOverlay');
+  const popupCloseBtn = document.getElementById('popupCloseBtn');
 
-/* HEADER */
-header {
-  background: url('https://i.postimg.cc/JhPBMXVL/IMG-2586.jpg') center center / cover no-repeat;
-  color: white;
-  text-align: center;
-  padding: 60px 40px;
-  position: relative;
-}
-
-header::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 0;
-}
-
-header h1,
-header p {
-  position: relative;
-  z-index: 1;
-}
-
-/* MAIN */
-main {
-  max-width: 900px;
-  margin: 60px auto 80px;
-  width: 90%;
-}
-
-section {
-  padding: 50px 30px;
-  margin-bottom: 60px;
-  overflow: visible;
-}
-
-h2 {
-  font-weight: 600;
-  font-size: 2.4rem;
-  margin-bottom: 36px;
-  color: #362062;
-  text-align: center;
-}
-
-/* Split layout */
-.split {
-  display: flex;
-  gap: 40px;
-  align-items: center;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.split.reverse {
-  flex-direction: row-reverse;
-}
-
-.image-column,
-.text-column {
-  flex: 1 1 280px;
-  min-width: 280px;
-}
-
-.image-column img {
-  width: 100%;
-  border-radius: 16px;
-  transition: transform 0.3s ease;
-}
-
-.image-column img:hover {
-  transform: scale(1.04) translateY(-6px);
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.15);
-  z-index: 10;
-}
-
-/* CONTACT IFRAME */
-iframe {
-  border-radius: 12px;
-  border: none;
-  width: 100%;
-  height: 300px;
-}
-
-.section {
-  max-width: 1200px;
-  margin: auto;
-  padding: 40px 20px;
-  text-align: center;
-}
-
-/* FOOTER */
-footer {
-  background: #4B3B2B;
-  color: white;
-  text-align: center;
-  padding: 40px 20px;
-  font-size: 14px;
-}
-
-footer p {
-  margin-bottom: 16px;
-}
-
-footer a {
-  color: white;
-  text-decoration: underline;
-  margin: 0 10px;
-  font-weight: 500;
-}
-
-.social-icons a {
-  display: inline-block;
-  margin: 0 12px;
-  filter: invert(1);
-  transition: filter 0.3s ease;
-}
-
-.social-icons a:hover {
-  filter: invert(0.7) sepia(0.3);
-}
-
-.social-icons img {
-  width: 28px;
-  height: 28px;
-}
-
-/* Responsive nav dropdown for mobile */
-@media (max-width: 760px) {
-  nav {
-    padding: 15px 20px;
+  // AOS animation
+  if (window.AOS) {
+    AOS.init({
+      duration: 900,
+      easing: 'ease-in-out',
+      once: true,
+      mirror: false
+    });
   }
 
-  .nav-right {
-    gap: 10px;
+  // Show popup after 10s
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      if (!popupOverlay || !popupCloseBtn) return;
+      popupOverlay.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+      popupCloseBtn.focus();
+    }, 10000);
+  });
+
+  function closePopup() {
+    if (!popupOverlay) return;
+    popupOverlay.style.display = 'none';
+    document.body.style.overflow = '';
   }
 
-  .dropbtn {
-    padding: 10px 18px;
-    font-size: 16px;
-  }
+  popupCloseBtn?.addEventListener('click', closePopup);
 
-  .dropdown-content {
-    min-width: 180px;
-  }
-
-  main {
-    margin: 40px auto 60px;
-    width: 95%;
-  }
-
-  .split {
-    flex-direction: column !important;
-  }
-}
-
-/* Popup styles */
-    #popupOverlay {
-      display: none; /* Hidden by default */
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw;
-      height: 100vh;
-      background-color: rgba(0,0,0,0.6);
-      z-index: 1100;
-      justify-content: center;
-      align-items: center;
+  popupOverlay?.addEventListener('click', (e) => {
+    if (e.target === popupOverlay) {
+      closePopup();
     }
+  });
 
-    #popupContent {
-      position: relative;
-      background: white;
-      border-radius: 12px;
-      max-width: 90vw;
-      max-height: 90vh;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
-      overflow: hidden;
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && popupOverlay?.style.display === 'flex') {
+      closePopup();
     }
+  });
+});
 
-    #popupContent img {
-      display: block;
-      max-width: 100%;
-      max-height: 80vh;
-      border-radius: 12px;
-      user-select: none;
+
+// Lightbox logic
+document.addEventListener("DOMContentLoaded", function () {
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.querySelector(".lightbox-img");
+  const closeBtn = document.querySelector(".lightbox-close");
+
+  // Open lightbox on image click
+  document.querySelectorAll(".gallery img").forEach(img => {
+    img.addEventListener("click", function () {
+      lightbox.style.display = "flex";
+      lightboxImg.src = this.src;
+      lightboxImg.alt = this.alt;
+    });
+  });
+
+  // Close lightbox
+  closeBtn.addEventListener("click", function () {
+    lightbox.style.display = "none";
+  });
+
+  // Close if you click outside the image
+  lightbox.addEventListener("click", function (e) {
+    if (e.target === lightbox) {
+      lightbox.style.display = "none";
     }
+  });
+});
 
-    #popupCloseBtn {
-      position: absolute;
-      top: 8px;
-      right: 12px;
-      font-size: 28px;
-      font-weight: bold;
-      color: #333;
-      cursor: pointer;
-      background: transparent;
-      border: none;
-      user-select: none;
-      line-height: 1;
-    }
+function toggleLanguage() {
+  const isSpanish = document.documentElement.lang === "es";
+  const newLang = isSpanish ? "en" : "es";
+  document.documentElement.lang = newLang;
 
-    #popupCloseBtn:hover {
-      color: #e03e3e;
-    }
+  const updateText = (id, text) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = text;
+  };
 
-    /* MOBILE-FRIENDLY IMAGES & LAYOUT FIX */
-@media (max-width: 768px) {
-  .image-column img {
-    width: 100%;
-    height: auto;
-    max-width: 100%;
-    display: block;
-    margin: 0 auto;
+  updateText("nav-welcome", newLang === "en" ? "Welcome" : "Bienvenida");
+  updateText("nav-pastor", "Pastor");
+  updateText("nav-contact", newLang === "en" ? "Information" : "Información");
+  updateText("nav-gallery", newLang === "en" ? "Gallery" : "Galería");
+
+  const langBtn = document.querySelector(".lang-btn");
+  if (langBtn) langBtn.textContent = newLang === "en" ? "Español" : "English"; // switch target language
+
+  const navOffering = document.getElementById("nav-offering");
+  if (navOffering) {
+    navOffering.innerHTML = `
+      <img src="https://cdn.iconscout.com/icon/free/png-256/venmo-2-569346.png" alt="Venmo" style="height: 20px;">
+      ${newLang === "en" ? "Offering / Tithe" : "Ofrenda / Diezmo"}
+    `;
   }
 
-  .split {
-    flex-direction: column !important;
-    gap: 20px;
+    // Translate gallery heading
+  const galleryHeading = document.querySelector("#unpacto h2");
+  if (galleryHeading) {
+    galleryHeading.textContent = newLang === "en"
+      ? "A COVENANT NOT A CONTRACT"
+      : "UN PACTO NO UN CONTRATO";
   }
 
-  header {
-    padding: 40px 20px;
-    background-position: center top;
+  const slogan = document.getElementById("slogan");
+  if (slogan) slogan.textContent = newLang === "en" ? "Vuelve a Casa" : "Vuelve a Casa";
+
+  const pastorTitle = document.querySelector(".pastor-title");
+  if (pastorTitle) pastorTitle.textContent = newLang === "en" ? "Pastors of the Church" : "Pastores de la Iglesia";
+
+  const pastorName = document.querySelector(".pastor-name");
+  if (pastorName) pastorName.textContent = newLang === "en" ? "Valentin & Sonia Blancas" : "Valentín y Sonia Blancas";
+
+  const welcomePara = document.querySelector("#Welcome p");
+  if (welcomePara) {
+    welcomePara.textContent = newLang === "en"
+      ? "Welcome to IDJ Casa de Refugio. Our pastors carry a vision of faith, restoration, and community, centered on the love of Christ."
+      : "Bienvenidos a IDJ Casa de Refugio. Nuestros pastores llevan una visión de fe, restauración y comunidad, centrada en el amor de Cristo.";
   }
 
-  section {
-    padding: 30px 15px;
+  const contactHeading = document.querySelector("#contact-section h2");
+  if (contactHeading) contactHeading.textContent = newLang === "en" ? "Contact" : "Contacto";
+
+  const contactIntro = document.querySelector("#contact-section p");
+  if (contactIntro) contactIntro.textContent = newLang === "en" ? "Join us at:" : "Te esperamos en:";
+
+  const contactDetails = document.querySelector("#contact-section p + p");
+  if (contactDetails) {
+    contactDetails.innerHTML = newLang === "en"
+      ? `<strong>Phone:</strong> (760) 675-4847<br>
+         <strong>Email:</strong> casaderefugio0724@gmail.com<br><br>
+         <strong>IDJ Casa De Refugio</strong><br>
+         830 East Vista Way, Suite 221<br>
+         Vista, California 92083, United States`
+      : `<strong>Teléfono:</strong> (760) 675-4847<br>
+         <strong>Correo:</strong> casaderefugio0724@gmail.com<br><br>
+         <strong>IDJ Casa De Refugio</strong><br>
+         830 East Vista Way, Suite 221<br>
+         Vista, California 92083, United States`;
+  }
+}
+
+// Define translations
+const translations = {
+  es: {
+    maintenanceHeading: "Actualmente estamos en mantenimiento.<br /> Es posible que algunas páginas o el sitio web completo no sean 100% funcionales o estén disponibles.<br /> Vuelva pronto.",
+    enlargedImageAlt: "Imagen ampliada"
+  },
+  en: {
+    maintenanceHeading: "We are currently undergoing maintenance.<br /> Some pages or the entire website may not be fully functional or available.<br /> Please check back soon.",
+    enlargedImageAlt: "Enlarged Image"
+  }
+};
+
+// Current language (default: Spanish)
+let currentLang = 'es';
+
+// Translation logic
+function setLanguage(lang) {
+  if (!translations[lang]) return;
+  currentLang = lang;
+
+  // Translate maintenance heading
+  const maintHeading = document.querySelector("#maint h2");
+  if (maintHeading) {
+    maintHeading.innerHTML = translations[lang].maintenanceHeading;
   }
 
-  h2 {
-    font-size: 1.8rem;
+  // Translate lightbox image alt
+  const lightboxImg = document.querySelector(".lightbox-img");
+  if (lightboxImg) {
+    lightboxImg.alt = translations[lang].enlargedImageAlt;
   }
 }
 
+// Optional: Language toggle button
+document.addEventListener("DOMContentLoaded", () => {
+  const toggleBtn = document.createElement("button");
+  toggleBtn.textContent = "EN / ES";
+  toggleBtn.style.position = "fixed";
+  toggleBtn.style.top = "10px";
+  toggleBtn.style.right = "10px";
+  toggleBtn.style.zIndex = "1000";
+  document.body.appendChild(toggleBtn);
 
+  toggleBtn.addEventListener("click", () => {
+    setLanguage(currentLang === 'es' ? 'en' : 'es');
+  });
+});
 
-/* Ensure full-page elements don't cause overflow */
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-  font-family: sans-serif;
-}
-
-/* Make sure the section fits on small screens */
-.section {
-  padding: 1rem;
-  max-width: 100%;
-}
-
-/* Header styles */
-header {
-  text-align: center;
-  padding: 1rem;
-  background-color: #f0f0f0;
-}
-
-header h1 {
-  font-size: 1.5rem;
-  margin: 0;
-}
-
-
-/* Responsive image styles */
-.gallery img {
-  width: 100%;
-  height: auto;
-  border-radius: 6px;
-  display: block;
-  object-fit: cover;
-}
-
-.event-gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 10px;
-  max-width: 100%;
-  padding: 0;
-  margin: 0 auto;
-}
-
-.event-gallery img {
-  width: 100%;
-  height: auto;
-  border-radius: 6px;
-  display: block;
-  object-fit: cover;
-}
-
-
-/* Lightbox container */
-.lightbox {
-  display: none;
-  position: fixed;
-  z-index: 999;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.8);
-  justify-content: center;
-  align-items: center;
-}
-
-/* The full-size image */
-.lightbox-img {
-  max-width: 90%;
-  max-height: 90%;
-  border-radius: 10px;
-  box-shadow: 0 0 10px #fff;
-}
-
-/* Close button */
-.lightbox-close {
-  position: absolute;
-  top: 20px;
-  right: 30px;
-  font-size: 2rem;
-  color: white;
-  cursor: pointer;
-  z-index: 1000;
-}
-
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-}
