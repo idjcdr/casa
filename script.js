@@ -242,7 +242,7 @@ function toggleLanguage() {
          Vista, California 92083, United States`;
   }
 }
- const galleryHeading = document.querySelector("#maint h2");
+ const maintenance = document.querySelector("#maint h2");
   if (maintenance) {
     maintenance.textContent = newLang === "en"
       ? "We are currently undergoing maintenance.<br /> Some pages or the full website might not be 100% functional or available. <br /> Please check back soon."
