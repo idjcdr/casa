@@ -205,6 +205,12 @@ function toggleLanguage() {
       ? "A COVENANT NOT A CONTRACT"
       : "UN PACTO NO UN CONTRATO";
   }
+  const sectionHeading = document.querySelector("#maint h2");
+  if (sectionHeading) {
+    sectionHeading.textContent = newLang === "en"
+      ? "We are currently undergoing maintenance.<br /> Some pages or the full website might not be 100% functional or available. <br /> Please check back soon."
+      : "Actualmente estamos en mantenimiento.<br /> Es posible que algunas páginas o el sitio web completo no sean 100% funcionales o estén disponibles.<br /> Vuelva pronto.";
+  }
 
   const slogan = document.getElementById("slogan");
   if (slogan) slogan.textContent = newLang === "en" ? "Vuelve a Casa" : "Vuelve a Casa";
