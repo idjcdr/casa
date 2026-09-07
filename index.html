@@ -4,39 +4,45 @@
 <head>
   <meta charset="UTF-8">
 
-  <!-- Makes the website scale correctly on phones/tablets -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>IDJ Casa de Refugio</title>
 
-  <!-- Main stylesheet -->
-  <link rel="stylesheet" href="style.css">
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
 
-  <!-- AOS animations -->
   <link
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"
   >
 </head>
 
-
 <body>
 
-  <!-- Header loaded through script.js -->
+  <!-- HEADER -->
   <div id="header"></div>
 
 
   <main>
 
     <!-- =====================================================
-         VISIÓN
+         VISIÓN DE LA IGLESIA
     ====================================================== -->
 
-    <section data-aos="fade-up" data-aos-delay="100">
+    <section
+      data-aos="fade-up"
+      data-aos-delay="100"
+    >
 
       <h2 id="vision-title">
         Visión de la Iglesia
       </h2>
+
 
       <div class="split">
 
@@ -56,12 +62,12 @@
 
         </div>
 
+
         <div class="text-column">
 
           <p id="vision-text">
-            Nuestra misión es transformar comunidades y llevar a otros
-            hacia Cristo. Somos una comunidad que busca glorificar a Dios
-            entregándonos a Jesús.
+            Nuestra misión es transformar comunidades y llevar a otros hacia Cristo.
+            Somos una comunidad que busca glorificar a Dios entregándonos a Jesús.
           </p>
 
         </div>
@@ -72,14 +78,18 @@
 
 
     <!-- =====================================================
-         HORARIOS
+         HORARIOS DE SERVICIO
     ====================================================== -->
 
-    <section data-aos="fade-up" data-aos-delay="200">
+    <section
+      data-aos="fade-up"
+      data-aos-delay="200"
+    >
 
       <h2 id="schedule-title">
         Horarios de Servicio
       </h2>
+
 
       <div class="split reverse">
 
@@ -98,6 +108,7 @@
           >
 
         </div>
+
 
         <div class="text-column">
 
@@ -132,11 +143,15 @@
          MENSAJE DEL PASTOR
     ====================================================== -->
 
-    <section data-aos="fade-up" data-aos-delay="300">
+    <section
+      data-aos="fade-up"
+      data-aos-delay="300"
+    >
 
       <h2 id="pastor-message-title">
         Mensaje del Pastor
       </h2>
+
 
       <div class="split">
 
@@ -156,13 +171,13 @@
 
         </div>
 
+
         <div class="text-column">
 
           <p id="pastor-message-text">
-            "Nuestro deseo es que cada persona que entre por nuestras
-            puertas experimente el amor de Cristo y reciba la restauración
-            que solo Él puede dar. Te invitamos a formar parte de esta
-            familia de fe."
+            "Nuestro deseo es que cada persona que entre por nuestras puertas
+            experimente el amor de Cristo y reciba la restauración que solo Él
+            puede dar. Te invitamos a formar parte de esta familia de fe."
 
             <br><br>
 
@@ -180,11 +195,15 @@
          CONTACTO
     ====================================================== -->
 
-    <section data-aos="fade-up" data-aos-delay="400">
+    <section
+      data-aos="fade-up"
+      data-aos-delay="400"
+    >
 
       <h2 id="contact-title">
         Contacto
       </h2>
+
 
       <div class="split reverse">
 
@@ -208,8 +227,7 @@
             </li>
 
             <li>
-              1010 E Vista Way, Suite H,
-              Vista, CA 92084
+              1010 E Vista Way, Suite H, Vista, CA 92084
             </li>
 
             <li>
@@ -239,7 +257,7 @@
       </div>
 
 
-      <!-- Google Maps -->
+      <!-- GOOGLE MAP -->
 
       <iframe
         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6676.09688098994!2d-117.23193392547016!3d33.2128262734845!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80dc768ef7f9b06d%3A0xd829d2dce19a35a7!2s1010%20E%20Vista%20Way%2C%20Vista%2C%20CA%2092084!5e0!3m2!1sen!2sus!4v1759036708299!5m2!1sen!2sus"
@@ -254,19 +272,19 @@
   </main>
 
 
-  <!-- Footer loaded through script.js -->
+  <!-- FOOTER -->
   <div id="footer"></div>
 
 
   <!-- =====================================================
        POPUP
-       Keep this near the bottom, before </body>
   ====================================================== -->
 
   <div
     id="popupOverlay"
     role="dialog"
     aria-modal="true"
+    aria-hidden="true"
     aria-label="Anuncio importante"
   >
 
@@ -275,9 +293,11 @@
       <button
         id="popupCloseBtn"
         type="button"
-        aria-label="Cerrar ventana emergente">
+        aria-label="Cerrar ventana emergente"
+      >
         &times;
       </button>
+
 
       <img
         src="https://i.postimg.cc/mkYcdL34/newplace.jpg"
@@ -293,10 +313,8 @@
        JAVASCRIPT
   ====================================================== -->
 
-  <!-- AOS animation library -->
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 
-  <!-- Your website JavaScript -->
   <script src="script.js"></script>
 
 </body>
