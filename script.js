@@ -1,47 +1,12 @@
-```javascript
 /* =========================================================
    IDJ CASA DE REFUGIO
-   Main JavaScript
+   MAIN JAVASCRIPT
 ========================================================= */
 
-document.addEventListener("DOMContentLoaded", async () => {
+document.addEventListener("DOMContentLoaded", () => {
 
   /* =======================================================
-     LOAD HEADER & FOOTER
-  ======================================================= */
-
-  async function loadHTML(elementId, file) {
-    const container = document.getElementById(elementId);
-
-    // Page does not use this container
-    if (!container) return;
-
-    try {
-      const response = await fetch(file);
-
-      if (!response.ok) {
-        throw new Error(
-          `Could not load ${file}. HTTP status: ${response.status}`
-        );
-      }
-
-      container.innerHTML = await response.text();
-
-    } catch (error) {
-      console.error(`Error loading ${file}:`, error);
-    }
-  }
-
-
-  // Load both shared files
-  await Promise.all([
-    loadHTML("header", "header.html"),
-    loadHTML("footer", "footer.html")
-  ]);
-
-
-  /* =======================================================
-     AOS SCROLL ANIMATIONS
+     AOS
   ======================================================= */
 
   if (window.AOS) {
@@ -55,59 +20,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
   /* =======================================================
-     NAVIGATION / DROPDOWN
-  ======================================================= */
-
-  const menuBtn = document.getElementById("menuButton");
-  const dropdown = document.getElementById("menuDropdown");
-
-  if (menuBtn && dropdown) {
-
-    menuBtn.addEventListener("click", (event) => {
-      event.stopPropagation();
-
-      const isOpen = dropdown.classList.toggle("show");
-
-      menuBtn.setAttribute(
-        "aria-expanded",
-        String(isOpen)
-      );
-    });
-
-
-    // Close dropdown when clicking outside
-    document.addEventListener("click", (event) => {
-
-      if (!event.target.closest(".dropdown")) {
-        dropdown.classList.remove("show");
-
-        menuBtn.setAttribute(
-          "aria-expanded",
-          "false"
-        );
-      }
-
-    });
-
-
-    // Escape key closes menu
-    document.addEventListener("keydown", (event) => {
-
-      if (event.key === "Escape") {
-        dropdown.classList.remove("show");
-
-        menuBtn.setAttribute(
-          "aria-expanded",
-          "false"
-        );
-      }
-
-    });
-  }
-
-
-  /* =======================================================
-     LANGUAGE SYSTEM
+     LANGUAGE STATE
   ======================================================= */
 
   let currentLanguage =
@@ -116,23 +29,31 @@ document.addEventListener("DOMContentLoaded", async () => {
       : "es";
 
 
-  const setText = (id, text) => {
+  /* =======================================================
+     HELPER FUNCTIONS
+  ======================================================= */
+
+  function setText(id, text) {
     const element = document.getElementById(id);
 
     if (element) {
       element.textContent = text;
     }
-  };
+  }
 
 
-  const setHTML = (id, html) => {
+  function setHTML(id, html) {
     const element = document.getElementById(id);
 
     if (element) {
       element.innerHTML = html;
     }
-  };
+  }
 
+
+  /* =======================================================
+     LANGUAGE UPDATE
+  ======================================================= */
 
   function updateLanguage() {
 
@@ -142,23 +63,21 @@ document.addEventListener("DOMContentLoaded", async () => {
       isEnglish ? "en" : "es";
 
 
-    /* -----------------------------------------------------
-       LANGUAGE BUTTON
-    ----------------------------------------------------- */
+    /* LANGUAGE BUTTON */
 
-    const langToggleBtn =
+    const langButton =
       document.getElementById("langToggleBtn") ||
       document.querySelector(".lang-btn");
 
-    if (langToggleBtn) {
-      langToggleBtn.textContent =
-        isEnglish ? "Español" : "English";
+    if (langButton) {
+      langButton.textContent =
+        isEnglish
+          ? "Español"
+          : "English";
     }
 
 
-    /* -----------------------------------------------------
-       HEADER
-    ----------------------------------------------------- */
+    /* HEADER */
 
     setText(
       "header-title",
@@ -178,9 +97,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     );
 
 
-    /* -----------------------------------------------------
-       NAVIGATION
-    ----------------------------------------------------- */
+    /* NAVIGATION */
 
     setText(
       "nav-welcome",
@@ -209,9 +126,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     );
 
 
-    /* -----------------------------------------------------
-       OFFERING / TITHE
-    ----------------------------------------------------- */
+    /* OFFERING */
 
     const navOffering =
       document.getElementById("nav-offering");
@@ -222,8 +137,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         <img
           src="https://cdn.iconscout.com/icon/free/png-256/venmo-2-569346.png"
           alt="Venmo"
-          style="height:20px; width:auto;"
+          style="height:20px;width:auto;"
         >
+
         ${
           isEnglish
             ? "Offering / Tithe"
@@ -233,9 +149,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
 
-    /* -----------------------------------------------------
-       HOME PAGE — VISION
-    ----------------------------------------------------- */
+    /* VISION */
 
     setText(
       "vision-title",
@@ -252,9 +166,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     );
 
 
-    /* -----------------------------------------------------
-       HOME PAGE — SERVICE SCHEDULE
-    ----------------------------------------------------- */
+    /* SCHEDULE */
 
     setText(
       "schedule-title",
@@ -285,9 +197,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     );
 
 
-    /* -----------------------------------------------------
-       HOME PAGE — PASTOR MESSAGE
-    ----------------------------------------------------- */
+    /* PASTOR MESSAGE */
 
     setText(
       "pastor-message-title",
@@ -301,10 +211,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       isEnglish
 
         ? `
-          "Our desire is that everyone who walks through
-          our doors experiences the love of Christ and
-          receives the restoration that only He can give.
-          We invite you to be part of this family of faith."
+          "Our desire is that everyone who walks through our doors
+          experiences the love of Christ and receives the restoration
+          that only He can give. We invite you to be part of this family
+          of faith."
 
           <br><br>
 
@@ -312,10 +222,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         `
 
         : `
-          "Nuestro deseo es que cada persona que entre por
-          nuestras puertas experimente el amor de Cristo y
-          reciba la restauración que solo Él puede dar.
-          Te invitamos a formar parte de esta familia de fe."
+          "Nuestro deseo es que cada persona que entre por nuestras
+          puertas experimente el amor de Cristo y reciba la restauración
+          que solo Él puede dar. Te invitamos a formar parte de esta
+          familia de fe."
 
           <br><br>
 
@@ -324,9 +234,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     );
 
 
-    /* -----------------------------------------------------
-       HOME PAGE — CONTACT
-    ----------------------------------------------------- */
+    /* CONTACT */
 
     setText(
       "contact-title",
@@ -342,8 +250,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         ? `
           <li><strong>📍 Address:</strong></li>
           <li>
-            1010 E Vista Way, Suite H,
-            Vista, CA 92084
+            1010 E Vista Way, Suite H, Vista, CA 92084
           </li>
 
           <li><strong>📞 Phone:</strong></li>
@@ -364,8 +271,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         : `
           <li><strong>📍 Dirección:</strong></li>
           <li>
-            1010 E Vista Way, Suite H,
-            Vista, CA 92084
+            1010 E Vista Way, Suite H, Vista, CA 92084
           </li>
 
           <li><strong>📞 Teléfono:</strong></li>
@@ -385,53 +291,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     );
 
 
-    /* -----------------------------------------------------
-       PASTORS PAGE
-    ----------------------------------------------------- */
-
-    const pastorTitle =
-      document.querySelector(".pastor-title");
-
-    if (pastorTitle) {
-      pastorTitle.textContent =
-        isEnglish
-          ? "Pastors of the Church"
-          : "Pastores de la Iglesia";
-    }
-
-
-    const pastorName =
-      document.querySelector(".pastor-name");
-
-    if (pastorName) {
-      pastorName.textContent =
-        isEnglish
-          ? "Valentin & Sonia Blancas"
-          : "Valentín y Sonia Blancas";
-    }
-
-
-    /* -----------------------------------------------------
-       WELCOME PAGE
-    ----------------------------------------------------- */
-
-    const welcomePara =
-      document.querySelector("#Welcome p");
-
-    if (welcomePara) {
-
-      welcomePara.textContent =
-        isEnglish
-
-          ? "Welcome to IDJ Casa de Refugio. Our pastors carry a vision of faith, restoration, and community, centered on the love of Christ."
-
-          : "Bienvenidos a IDJ Casa de Refugio. Nuestros pastores llevan una visión de fe, restauración y comunidad, centrada en el amor de Cristo.";
-    }
-
-
-    /* -----------------------------------------------------
-       GALLERY PAGE
-    ----------------------------------------------------- */
+    /* GALLERY PAGE */
 
     const galleryHeading =
       document.querySelector("#unpacto h2");
@@ -445,9 +305,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
 
-    /* -----------------------------------------------------
-       MAINTENANCE MESSAGE
-    ----------------------------------------------------- */
+    /* MAINTENANCE PAGE */
 
     const maintenanceHeading =
       document.querySelector("#maint h2");
@@ -456,23 +314,58 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       maintenanceHeading.textContent =
         isEnglish
-
           ? "We are currently undergoing maintenance. Some pages or the full website might not be 100% functional or available. Please check back soon."
-
           : "Actualmente estamos en mantenimiento. Es posible que algunas páginas o el sitio web completo no sean 100% funcionales o estén disponibles. Vuelva pronto.";
     }
 
 
-    /* -----------------------------------------------------
-       OTHER CONTACT PAGE
-    ----------------------------------------------------- */
+    /* PASTORS PAGE */
+
+    const pastorTitle =
+      document.querySelector(".pastor-title");
+
+    if (pastorTitle) {
+
+      pastorTitle.textContent =
+        isEnglish
+          ? "Pastors of the Church"
+          : "Pastores de la Iglesia";
+    }
+
+
+    const pastorName =
+      document.querySelector(".pastor-name");
+
+    if (pastorName) {
+
+      pastorName.textContent =
+        isEnglish
+          ? "Valentin & Sonia Blancas"
+          : "Valentín y Sonia Blancas";
+    }
+
+
+    /* WELCOME PAGE */
+
+    const welcomeParagraph =
+      document.querySelector("#Welcome p");
+
+    if (welcomeParagraph) {
+
+      welcomeParagraph.textContent =
+        isEnglish
+          ? "Welcome to IDJ Casa de Refugio. Our pastors carry a vision of faith, restoration, and community, centered on the love of Christ."
+          : "Bienvenidos a IDJ Casa de Refugio. Nuestros pastores llevan una visión de fe, restauración y comunidad, centrada en el amor de Cristo.";
+    }
+
+
+    /* OTHER CONTACT PAGE */
 
     const contactHeading =
-      document.querySelector(
-        "#contact-section h2"
-      );
+      document.querySelector("#contact-section h2");
 
     if (contactHeading) {
+
       contactHeading.textContent =
         isEnglish
           ? "Contact"
@@ -481,11 +374,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
     const contactIntro =
-      document.querySelector(
-        "#contact-section p"
-      );
+      document.querySelector("#contact-section p");
 
     if (contactIntro) {
+
       contactIntro.textContent =
         isEnglish
           ? "Join us at:"
@@ -494,9 +386,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
     const contactDetails =
-      document.querySelector(
-        "#contact-section p + p"
-      );
+      document.querySelector("#contact-section p + p");
 
     if (contactDetails) {
 
@@ -519,8 +409,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             <strong>IDJ Casa de Refugio</strong>
             <br>
+
             1010 E Vista Way, Suite H
             <br>
+
             Vista, CA 92084
           `
 
@@ -540,16 +432,16 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             <strong>IDJ Casa de Refugio</strong>
             <br>
+
             1010 E Vista Way, Suite H
             <br>
+
             Vista, CA 92084
           `;
     }
 
 
-    /* -----------------------------------------------------
-       FOOTER
-    ----------------------------------------------------- */
+    /* FOOTER */
 
     setText(
       "footer-privacy",
@@ -574,30 +466,166 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
 
-  /* -------------------------------------------------------
-     LANGUAGE BUTTON EVENT
-  ------------------------------------------------------- */
+  /* =======================================================
+     NAVIGATION SETUP
+  ======================================================= */
 
-  const langToggleBtn =
-    document.getElementById("langToggleBtn") ||
-    document.querySelector(".lang-btn");
+  function setupNavigation() {
 
-  if (langToggleBtn) {
+    const menuButton =
+      document.getElementById("menuButton");
 
-    langToggleBtn.onclick = () => {
+    const menuDropdown =
+      document.getElementById("menuDropdown");
 
-      currentLanguage =
-        currentLanguage === "es"
-          ? "en"
-          : "es";
 
-      updateLanguage();
-    };
+    if (menuButton && menuDropdown) {
+
+      menuButton.addEventListener(
+        "click",
+        event => {
+
+          event.stopPropagation();
+
+          const isOpen =
+            menuDropdown.classList.toggle("show");
+
+          menuButton.setAttribute(
+            "aria-expanded",
+            String(isOpen)
+          );
+        }
+      );
+
+
+      document.addEventListener(
+        "click",
+        event => {
+
+          if (
+            !event.target.closest(".dropdown")
+          ) {
+
+            menuDropdown.classList.remove("show");
+
+            menuButton.setAttribute(
+              "aria-expanded",
+              "false"
+            );
+          }
+        }
+      );
+    }
+
+
+    /* LANGUAGE BUTTON */
+
+    const langButton =
+      document.getElementById("langToggleBtn") ||
+      document.querySelector(".lang-btn");
+
+
+    if (langButton) {
+
+      langButton.addEventListener(
+        "click",
+        () => {
+
+          currentLanguage =
+            currentLanguage === "es"
+              ? "en"
+              : "es";
+
+          updateLanguage();
+        }
+      );
+    }
+
+
+    updateLanguage();
   }
 
 
-  // Apply correct initial language
-  updateLanguage();
+  /* =======================================================
+     LOAD HEADER
+  ======================================================= */
+
+  fetch("header.html")
+
+    .then(response => {
+
+      if (!response.ok) {
+
+        throw new Error(
+          `header.html failed: ${response.status}`
+        );
+      }
+
+      return response.text();
+    })
+
+    .then(html => {
+
+      const header =
+        document.getElementById("header");
+
+      if (!header) {
+        return;
+      }
+
+      header.innerHTML = html;
+
+      setupNavigation();
+    })
+
+    .catch(error => {
+
+      console.error(
+        "Could not load header.html:",
+        error
+      );
+    });
+
+
+  /* =======================================================
+     LOAD FOOTER
+  ======================================================= */
+
+  fetch("footer.html")
+
+    .then(response => {
+
+      if (!response.ok) {
+
+        throw new Error(
+          `footer.html failed: ${response.status}`
+        );
+      }
+
+      return response.text();
+    })
+
+    .then(html => {
+
+      const footer =
+        document.getElementById("footer");
+
+      if (!footer) {
+        return;
+      }
+
+      footer.innerHTML = html;
+
+      updateLanguage();
+    })
+
+    .catch(error => {
+
+      console.error(
+        "Could not load footer.html:",
+        error
+      );
+    });
 
 
   /* =======================================================
@@ -607,27 +635,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   const popupOverlay =
     document.getElementById("popupOverlay");
 
-  const popupCloseBtn =
+  const popupCloseButton =
     document.getElementById("popupCloseBtn");
-
-
-  function openPopup() {
-
-    if (!popupOverlay || !popupCloseBtn) {
-      return;
-    }
-
-    popupOverlay.style.display = "flex";
-
-    popupOverlay.setAttribute(
-      "aria-hidden",
-      "false"
-    );
-
-    document.body.style.overflow = "hidden";
-
-    popupCloseBtn.focus();
-  }
 
 
   function closePopup() {
@@ -636,149 +645,216 @@ document.addEventListener("DOMContentLoaded", async () => {
       return;
     }
 
-    popupOverlay.style.display = "none";
+    popupOverlay.style.display =
+      "none";
 
     popupOverlay.setAttribute(
       "aria-hidden",
       "true"
     );
 
-    document.body.style.overflow = "";
+    document.body.style.overflow =
+      "";
   }
 
 
-  if (popupOverlay && popupCloseBtn) {
+  function openPopup() {
 
-    // Show popup after 10 seconds
-    setTimeout(openPopup, 10000);
+    if (
+      !popupOverlay ||
+      !popupCloseButton
+    ) {
+      return;
+    }
+
+    popupOverlay.style.display =
+      "flex";
+
+    popupOverlay.setAttribute(
+      "aria-hidden",
+      "false"
+    );
+
+    document.body.style.overflow =
+      "hidden";
+
+    popupCloseButton.focus();
+  }
 
 
-    // Close button
-    popupCloseBtn.addEventListener(
+  if (
+    popupOverlay &&
+    popupCloseButton
+  ) {
+
+    setTimeout(
+      openPopup,
+      10000
+    );
+
+
+    popupCloseButton.addEventListener(
       "click",
       closePopup
     );
 
 
-    // Click outside popup
     popupOverlay.addEventListener(
       "click",
-      (event) => {
-
-        if (event.target === popupOverlay) {
-          closePopup();
-        }
-
-      }
-    );
-
-
-    // Escape key
-    document.addEventListener(
-      "keydown",
-      (event) => {
+      event => {
 
         if (
-          event.key === "Escape" &&
-          popupOverlay.style.display === "flex"
+          event.target === popupOverlay
         ) {
+
           closePopup();
         }
-
       }
     );
   }
 
 
   /* =======================================================
-     GALLERY LIGHTBOX
+     LIGHTBOX
   ======================================================= */
 
   const lightbox =
     document.getElementById("lightbox");
 
-  const lightboxImg =
+  const lightboxImage =
     document.querySelector(".lightbox-img");
 
   const lightboxClose =
     document.querySelector(".lightbox-close");
 
-  const galleryImages =
-    document.querySelectorAll(".gallery img");
-
 
   function closeLightbox() {
 
-    if (!lightbox) return;
+    if (!lightbox) {
+      return;
+    }
 
-    lightbox.style.display = "none";
+    lightbox.style.display =
+      "none";
 
-    document.body.style.overflow = "";
+    document.body.style.overflow =
+      "";
   }
 
 
   if (
     lightbox &&
-    lightboxImg &&
+    lightboxImage &&
     lightboxClose
   ) {
 
-    galleryImages.forEach((image) => {
+    document
+      .querySelectorAll(".gallery img")
+      .forEach(image => {
 
-      image.addEventListener(
-        "click",
-        () => {
+        image.addEventListener(
+          "click",
+          () => {
 
-          lightboxImg.src = image.src;
+            lightboxImage.src =
+              image.src;
 
-          lightboxImg.alt =
-            image.alt || "Gallery image";
+            lightboxImage.alt =
+              image.alt || "Gallery image";
 
-          lightbox.style.display = "flex";
+            lightbox.style.display =
+              "flex";
 
-          document.body.style.overflow =
-            "hidden";
-        }
-      );
+            document.body.style.overflow =
+              "hidden";
+          }
+        );
+      });
 
-    });
 
-
-    // Close button
     lightboxClose.addEventListener(
       "click",
       closeLightbox
     );
 
 
-    // Click background to close
     lightbox.addEventListener(
       "click",
-      (event) => {
-
-        if (event.target === lightbox) {
-          closeLightbox();
-        }
-
-      }
-    );
-
-
-    // Escape closes lightbox
-    document.addEventListener(
-      "keydown",
-      (event) => {
+      event => {
 
         if (
-          event.key === "Escape" &&
-          lightbox.style.display === "flex"
+          event.target === lightbox
         ) {
+
           closeLightbox();
         }
-
       }
     );
   }
 
+
+  /* =======================================================
+     ESCAPE KEY
+  ======================================================= */
+
+  document.addEventListener(
+    "keydown",
+    event => {
+
+      if (
+        event.key !== "Escape"
+      ) {
+        return;
+      }
+
+
+      /* CLOSE POPUP */
+
+      if (
+        popupOverlay &&
+        popupOverlay.style.display === "flex"
+      ) {
+
+        closePopup();
+      }
+
+
+      /* CLOSE LIGHTBOX */
+
+      if (
+        lightbox &&
+        lightbox.style.display === "flex"
+      ) {
+
+        closeLightbox();
+      }
+
+
+      /* CLOSE MENU */
+
+      const menuDropdown =
+        document.getElementById("menuDropdown");
+
+      const menuButton =
+        document.getElementById("menuButton");
+
+
+      if (menuDropdown) {
+
+        menuDropdown.classList.remove(
+          "show"
+        );
+      }
+
+
+      if (menuButton) {
+
+        menuButton.setAttribute(
+          "aria-expanded",
+          "false"
+        );
+      }
+    }
+  );
+
 });
-```
