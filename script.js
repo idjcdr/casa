@@ -3,25 +3,7 @@
    MAIN JAVASCRIPT
 ========================================================= */
 
-document.addEventListener("DOMContentLoaded", () => {
-
-  /* =======================================================
-     AOS
-  ======================================================= */
-
-  if (window.AOS) {
-    AOS.init({
-      duration: 900,
-      easing: "ease-in-out",
-      once: true,
-      mirror: false
-    });
-  }
-
-
-  /* =======================================================
-     LANGUAGE STATE
-  ======================================================= */
+document.addEventListener("DOMContentLoaded", function () {
 
   let currentLanguage =
     document.documentElement.lang === "en"
@@ -34,7 +16,9 @@ document.addEventListener("DOMContentLoaded", () => {
   ======================================================= */
 
   function setText(id, text) {
-    const element = document.getElementById(id);
+
+    const element =
+      document.getElementById(id);
 
     if (element) {
       element.textContent = text;
@@ -43,7 +27,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   function setHTML(id, html) {
-    const element = document.getElementById(id);
+
+    const element =
+      document.getElementById(id);
 
     if (element) {
       element.innerHTML = html;
@@ -52,12 +38,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   /* =======================================================
-     LANGUAGE UPDATE
+     LANGUAGE
   ======================================================= */
 
   function updateLanguage() {
 
-    const isEnglish = currentLanguage === "en";
+    const isEnglish =
+      currentLanguage === "en";
+
 
     document.documentElement.lang =
       isEnglish ? "en" : "es";
@@ -69,7 +57,9 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("langToggleBtn") ||
       document.querySelector(".lang-btn");
 
+
     if (langButton) {
+
       langButton.textContent =
         isEnglish
           ? "Español"
@@ -86,10 +76,12 @@ document.addEventListener("DOMContentLoaded", () => {
         : "IDJ Casa de Refugio"
     );
 
+
     setText(
       "header-subtitle",
       "Vuelve a Casa"
     );
+
 
     setText(
       "slogan",
@@ -97,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
 
-    /* NAVIGATION */
+    /* NAV */
 
     setText(
       "nav-welcome",
@@ -106,10 +98,12 @@ document.addEventListener("DOMContentLoaded", () => {
         : "Bienvenida"
     );
 
+
     setText(
       "nav-pastor",
       "Pastor"
     );
+
 
     setText(
       "nav-contact",
@@ -117,6 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
         ? "Information"
         : "Información"
     );
+
 
     setText(
       "nav-gallery",
@@ -130,6 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const navOffering =
       document.getElementById("nav-offering");
+
 
     if (navOffering) {
 
@@ -158,10 +154,13 @@ document.addEventListener("DOMContentLoaded", () => {
         : "Visión de la Iglesia"
     );
 
+
     setText(
       "vision-text",
       isEnglish
+
         ? "Our mission is to transform communities and lead others to Christ. We are a community seeking to glorify God by giving ourselves to Jesus."
+
         : "Nuestra misión es transformar comunidades y llevar a otros hacia Cristo. Somos una comunidad que busca glorificar a Dios entregándonos a Jesús."
     );
 
@@ -175,8 +174,10 @@ document.addEventListener("DOMContentLoaded", () => {
         : "Horarios de Servicio"
     );
 
+
     setHTML(
       "schedule-list",
+
       isEnglish
 
         ? `
@@ -206,15 +207,17 @@ document.addEventListener("DOMContentLoaded", () => {
         : "Mensaje del Pastor"
     );
 
+
     setHTML(
       "pastor-message-text",
+
       isEnglish
 
         ? `
           "Our desire is that everyone who walks through our doors
           experiences the love of Christ and receives the restoration
-          that only He can give. We invite you to be part of this family
-          of faith."
+          that only He can give. We invite you to be part of this
+          family of faith."
 
           <br><br>
 
@@ -243,17 +246,21 @@ document.addEventListener("DOMContentLoaded", () => {
         : "Contacto"
     );
 
+
     setHTML(
       "contact-list",
+
       isEnglish
 
         ? `
           <li><strong>📍 Address:</strong></li>
+
           <li>
             1010 E Vista Way, Suite H, Vista, CA 92084
           </li>
 
           <li><strong>📞 Phone:</strong></li>
+
           <li>
             <a href="tel:+17606754847">
               (760) 675-4847
@@ -261,6 +268,7 @@ document.addEventListener("DOMContentLoaded", () => {
           </li>
 
           <li><strong>📧 Email:</strong></li>
+
           <li>
             <a href="mailto:info@idjcdr.com">
               info@idjcdr.com
@@ -270,11 +278,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         : `
           <li><strong>📍 Dirección:</strong></li>
+
           <li>
             1010 E Vista Way, Suite H, Vista, CA 92084
           </li>
 
           <li><strong>📞 Teléfono:</strong></li>
+
           <li>
             <a href="tel:+17606754847">
               (760) 675-4847
@@ -282,6 +292,7 @@ document.addEventListener("DOMContentLoaded", () => {
           </li>
 
           <li><strong>📧 Correo:</strong></li>
+
           <li>
             <a href="mailto:info@idjcdr.com">
               info@idjcdr.com
@@ -291,38 +302,11 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
 
-    /* GALLERY PAGE */
-
-    const galleryHeading =
-      document.querySelector("#unpacto h2");
-
-    if (galleryHeading) {
-
-      galleryHeading.textContent =
-        isEnglish
-          ? "A COVENANT NOT A CONTRACT"
-          : "UN PACTO NO UN CONTRATO";
-    }
-
-
-    /* MAINTENANCE PAGE */
-
-    const maintenanceHeading =
-      document.querySelector("#maint h2");
-
-    if (maintenanceHeading) {
-
-      maintenanceHeading.textContent =
-        isEnglish
-          ? "We are currently undergoing maintenance. Some pages or the full website might not be 100% functional or available. Please check back soon."
-          : "Actualmente estamos en mantenimiento. Es posible que algunas páginas o el sitio web completo no sean 100% funcionales o estén disponibles. Vuelva pronto.";
-    }
-
-
     /* PASTORS PAGE */
 
     const pastorTitle =
       document.querySelector(".pastor-title");
+
 
     if (pastorTitle) {
 
@@ -335,6 +319,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const pastorName =
       document.querySelector(".pastor-name");
+
 
     if (pastorName) {
 
@@ -350,94 +335,47 @@ document.addEventListener("DOMContentLoaded", () => {
     const welcomeParagraph =
       document.querySelector("#Welcome p");
 
+
     if (welcomeParagraph) {
 
       welcomeParagraph.textContent =
         isEnglish
+
           ? "Welcome to IDJ Casa de Refugio. Our pastors carry a vision of faith, restoration, and community, centered on the love of Christ."
+
           : "Bienvenidos a IDJ Casa de Refugio. Nuestros pastores llevan una visión de fe, restauración y comunidad, centrada en el amor de Cristo.";
     }
 
 
-    /* OTHER CONTACT PAGE */
+    /* GALLERY */
 
-    const contactHeading =
-      document.querySelector("#contact-section h2");
+    const galleryHeading =
+      document.querySelector("#unpacto h2");
 
-    if (contactHeading) {
 
-      contactHeading.textContent =
+    if (galleryHeading) {
+
+      galleryHeading.textContent =
         isEnglish
-          ? "Contact"
-          : "Contacto";
+          ? "A COVENANT NOT A CONTRACT"
+          : "UN PACTO NO UN CONTRATO";
     }
 
 
-    const contactIntro =
-      document.querySelector("#contact-section p");
+    /* MAINTENANCE */
 
-    if (contactIntro) {
-
-      contactIntro.textContent =
-        isEnglish
-          ? "Join us at:"
-          : "Te esperamos en:";
-    }
+    const maintenanceHeading =
+      document.querySelector("#maint h2");
 
 
-    const contactDetails =
-      document.querySelector("#contact-section p + p");
+    if (maintenanceHeading) {
 
-    if (contactDetails) {
-
-      contactDetails.innerHTML =
+      maintenanceHeading.textContent =
         isEnglish
 
-          ? `
-            <strong>Phone:</strong>
-            <a href="tel:+17606754847">
-              (760) 675-4847
-            </a>
-            <br>
+          ? "We are currently undergoing maintenance. Some pages or the full website might not be 100% functional or available. Please check back soon."
 
-            <strong>Email:</strong>
-            <a href="mailto:info@idjcdr.com">
-              info@idjcdr.com
-            </a>
-
-            <br><br>
-
-            <strong>IDJ Casa de Refugio</strong>
-            <br>
-
-            1010 E Vista Way, Suite H
-            <br>
-
-            Vista, CA 92084
-          `
-
-          : `
-            <strong>Teléfono:</strong>
-            <a href="tel:+17606754847">
-              (760) 675-4847
-            </a>
-            <br>
-
-            <strong>Correo:</strong>
-            <a href="mailto:info@idjcdr.com">
-              info@idjcdr.com
-            </a>
-
-            <br><br>
-
-            <strong>IDJ Casa de Refugio</strong>
-            <br>
-
-            1010 E Vista Way, Suite H
-            <br>
-
-            Vista, CA 92084
-          `;
+          : "Actualmente estamos en mantenimiento. Es posible que algunas páginas o el sitio web completo no sean 100% funcionales o estén disponibles. Vuelva pronto.";
     }
 
 
@@ -450,12 +388,14 @@ document.addEventListener("DOMContentLoaded", () => {
         : "Política de Privacidad"
     );
 
+
     setText(
       "footer-prayer",
       isEnglish
         ? "Prayer"
         : "Oración"
     );
+
 
     setText(
       "footer-church-info",
@@ -466,8 +406,28 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
+
   /* =======================================================
-     NAVIGATION SETUP
+     GLOBAL LANGUAGE FUNCTION
+
+     This also works if header.html uses:
+     onclick="toggleLanguage()"
+  ======================================================= */
+
+  window.toggleLanguage = function () {
+
+    currentLanguage =
+      currentLanguage === "es"
+        ? "en"
+        : "es";
+
+    updateLanguage();
+  };
+
+
+
+  /* =======================================================
+     NAVIGATION
   ======================================================= */
 
   function setupNavigation() {
@@ -479,11 +439,14 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("menuDropdown");
 
 
-    if (menuButton && menuDropdown) {
+    if (
+      menuButton &&
+      menuDropdown
+    ) {
 
       menuButton.addEventListener(
         "click",
-        event => {
+        function (event) {
 
           event.stopPropagation();
 
@@ -500,10 +463,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
       document.addEventListener(
         "click",
-        event => {
+        function (event) {
+
+          const target = event.target;
 
           if (
-            !event.target.closest(".dropdown")
+            target instanceof Element &&
+            !target.closest(".dropdown")
           ) {
 
             menuDropdown.classList.remove("show");
@@ -527,18 +493,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (langButton) {
 
-      langButton.addEventListener(
-        "click",
-        () => {
+      /*
+        If header.html already has:
+        onclick="toggleLanguage()"
 
-          currentLanguage =
-            currentLanguage === "es"
-              ? "en"
-              : "es";
+        we don't add another listener.
+      */
 
-          updateLanguage();
-        }
-      );
+      if (!langButton.getAttribute("onclick")) {
+
+        langButton.addEventListener(
+          "click",
+          window.toggleLanguage
+        );
+      }
     }
 
 
@@ -546,86 +514,89 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
+
   /* =======================================================
      LOAD HEADER
   ======================================================= */
 
-  fetch("header.html")
+  const headerContainer =
+    document.getElementById("header");
 
-    .then(response => {
 
-      if (!response.ok) {
+  if (headerContainer) {
 
-        throw new Error(
-          `header.html failed: ${response.status}`
+    fetch("header.html")
+
+      .then(function (response) {
+
+        if (!response.ok) {
+
+          throw new Error(
+            "Could not load header.html"
+          );
+        }
+
+        return response.text();
+      })
+
+      .then(function (html) {
+
+        headerContainer.innerHTML = html;
+
+        setupNavigation();
+      })
+
+      .catch(function (error) {
+
+        console.error(
+          "Header error:",
+          error
         );
-      }
+      });
+  }
 
-      return response.text();
-    })
-
-    .then(html => {
-
-      const header =
-        document.getElementById("header");
-
-      if (!header) {
-        return;
-      }
-
-      header.innerHTML = html;
-
-      setupNavigation();
-    })
-
-    .catch(error => {
-
-      console.error(
-        "Could not load header.html:",
-        error
-      );
-    });
 
 
   /* =======================================================
      LOAD FOOTER
   ======================================================= */
 
-  fetch("footer.html")
+  const footerContainer =
+    document.getElementById("footer");
 
-    .then(response => {
 
-      if (!response.ok) {
+  if (footerContainer) {
 
-        throw new Error(
-          `footer.html failed: ${response.status}`
+    fetch("footer.html")
+
+      .then(function (response) {
+
+        if (!response.ok) {
+
+          throw new Error(
+            "Could not load footer.html"
+          );
+        }
+
+        return response.text();
+      })
+
+      .then(function (html) {
+
+        footerContainer.innerHTML = html;
+
+        updateLanguage();
+      })
+
+      .catch(function (error) {
+
+        console.error(
+          "Footer error:",
+          error
         );
-      }
+      });
+  }
 
-      return response.text();
-    })
-
-    .then(html => {
-
-      const footer =
-        document.getElementById("footer");
-
-      if (!footer) {
-        return;
-      }
-
-      footer.innerHTML = html;
-
-      updateLanguage();
-    })
-
-    .catch(error => {
-
-      console.error(
-        "Could not load footer.html:",
-        error
-      );
-    });
 
 
   /* =======================================================
@@ -701,7 +672,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     popupOverlay.addEventListener(
       "click",
-      event => {
+      function (event) {
 
         if (
           event.target === popupOverlay
@@ -714,6 +685,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
+
   /* =======================================================
      LIGHTBOX
   ======================================================= */
@@ -724,7 +696,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const lightboxImage =
     document.querySelector(".lightbox-img");
 
-  const lightboxClose =
+  const lightboxCloseButton =
     document.querySelector(".lightbox-close");
 
 
@@ -745,16 +717,19 @@ document.addEventListener("DOMContentLoaded", () => {
   if (
     lightbox &&
     lightboxImage &&
-    lightboxClose
+    lightboxCloseButton
   ) {
 
-    document
-      .querySelectorAll(".gallery img")
-      .forEach(image => {
+    const galleryImages =
+      document.querySelectorAll(".gallery img");
+
+
+    galleryImages.forEach(
+      function (image) {
 
         image.addEventListener(
           "click",
-          () => {
+          function () {
 
             lightboxImage.src =
               image.src;
@@ -769,10 +744,11 @@ document.addEventListener("DOMContentLoaded", () => {
               "hidden";
           }
         );
-      });
+      }
+    );
 
 
-    lightboxClose.addEventListener(
+    lightboxCloseButton.addEventListener(
       "click",
       closeLightbox
     );
@@ -780,7 +756,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     lightbox.addEventListener(
       "click",
-      event => {
+      function (event) {
 
         if (
           event.target === lightbox
@@ -793,22 +769,21 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
+
   /* =======================================================
      ESCAPE KEY
   ======================================================= */
 
   document.addEventListener(
     "keydown",
-    event => {
+    function (event) {
 
-      if (
-        event.key !== "Escape"
-      ) {
+      if (event.key !== "Escape") {
         return;
       }
 
 
-      /* CLOSE POPUP */
+      /* POPUP */
 
       if (
         popupOverlay &&
@@ -819,7 +794,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
 
-      /* CLOSE LIGHTBOX */
+      /* LIGHTBOX */
 
       if (
         lightbox &&
@@ -830,7 +805,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
 
-      /* CLOSE MENU */
+      /* MENU */
 
       const menuDropdown =
         document.getElementById("menuDropdown");
@@ -856,5 +831,9 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   );
+
+
+  /* Apply Spanish content immediately */
+  updateLanguage();
 
 });
