@@ -840,3 +840,99 @@ footer a {
   }
 
 }
+
+/* =========================================
+   MOBILE RESPONSIVE FIX
+   Keep this at the VERY BOTTOM of style.css
+========================================= */
+
+@media (max-width: 768px) {
+
+  main {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  section {
+    width: 100%;
+    padding: 45px 20px;
+    margin-bottom: 20px;
+  }
+
+  section h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  /* Stack image and text vertically */
+  .split,
+  .split.reverse {
+    display: flex;
+    flex-direction: column !important;
+    width: 100%;
+    gap: 25px;
+    align-items: stretch;
+  }
+
+  .image-column,
+  .text-column {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: none !important;
+    min-width: 0;
+  }
+
+  /* Images take full mobile width */
+  .image-column img {
+    display: block;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto;
+    margin: 0 0 15px 0;
+    border-radius: 16px;
+  }
+
+  /* Text goes below image */
+  .text-column {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .text-column p,
+  .text-column ul {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Google map */
+  iframe {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 300px !important;
+    margin-top: 25px;
+  }
+}
+
+
+/* Smaller phones */
+@media (max-width: 480px) {
+
+  section {
+    padding: 40px 18px;
+  }
+
+  section h2 {
+    font-size: 1.8rem;
+  }
+
+  .split,
+  .split.reverse {
+    gap: 20px;
+  }
+
+  .text-column {
+    font-size: 0.95rem;
+  }
+}
