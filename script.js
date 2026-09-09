@@ -2,7 +2,7 @@
 fetch('header.html')
   .then(response => response.text())
   .then(html => {
-    document.getElementById('header').innerHTML = html;
+    document.getElementById('/header').innerHTML = html;
 
     const menuBtn = document.getElementById("menuButton");
     const dropdown = document.getElementById("menuDropdown");
