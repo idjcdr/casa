@@ -1,8 +1,8 @@
 // Load header and then bind menu + language logic
-fetch('header.html')
+fetch('/header.html')
   .then(response => response.text())
   .then(html => {
-    document.getElementById('/header').innerHTML = html;
+    document.getElementById('header').innerHTML = html;
 
     const menuBtn = document.getElementById("menuButton");
     const dropdown = document.getElementById("menuDropdown");
@@ -159,7 +159,7 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", () => {
 
   // Load headeren.html
-  fetch("headeren.html")
+  fetch("/headeren.html")
     .then(response => response.text())
     .then(data => {
       document.getElementById("headeren").innerHTML = data;
@@ -192,7 +192,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   // Load footeren.html
-  fetch("footeren.html")
+  fetch("/footeren.html")
     .then(response => response.text())
     .then(data => {
       document.getElementById("footeren").innerHTML = data;
