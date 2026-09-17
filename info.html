@@ -8,7 +8,7 @@
   <link rel="icon" type="image/png" href="https://i.postimg.cc/BQbhpGLg/Untitled-design.png">
 
   <!-- External Styles -->
-  <link rel="stylesheet" href="style.css" />
+   <link rel="stylesheet" href="/style.css"> 
 
   <!-- AOS Animation CSS -->
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
@@ -32,12 +32,13 @@
 
   <section class="section">
     <h2 id="dir-title">Dirección</h2>
-    <p id="dir-text">830 E Vista Way, Suite 221, Vista, CA 92084</p>
+    <p id="dir-text">2210 E Vista Way, Suite 10, Vista, CA 92084</p>
 
     <h2 id="services-title">Horarios de Servicios</h2>
     <ul id="service-list">
       <li><strong>Domingo:</strong> Servicio General - 4:30 PM</li>
-      <li><strong>Martes:</strong> Estudio Bíblico - 7:00 PM</li>
+      <li><strong>Lunes:</strong> Oracion - 7:00 PM</li>
+      <li><strong>Martes:</strong> Servicio - 7:00 PM</li>
     </ul>
 
     <h2 id="phone-title">Teléfono</h2>
@@ -47,15 +48,24 @@
     <p id="email-text">casaderefugio0724@gmail.com</p>
   </section>
 
-  <iframe src="https://www.google.com/maps?q=830+E+Vista+Way+Suite+221,+Vista,+CA+92084&output=embed" width="100%" heigt="300" style="border:none;"></iframe>
-
+ <iframe
+  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2763.6595828297804!2d-117.22911872512968!3d33.23377147347612!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80dc76fbd598b855%3A0x758f1c61cd5aa000!2s2210%20E%20Vista%20Way%20%2310%2C%20Vista%2C%20CA%2092084!5e1!3m2!1sen!2sus!4v1789501520293!5m2!1sen!2sus"
+  width="100%"
+  height="450"
+  style="border:0;"
+  loading="lazy"
+  allowfullscreen
+  referrerpolicy="no-referrer-when-downgrade"
+  title="IDJ Casa de Refugio Location">
+</iframe>
+  
   <!-- Footer -->
 
 <div id="footer"></div>
 
   <!-- AOS & Custom JS -->
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-  <script src="script.js"></script>
+  <script src="/script.js"></script>
 
    <script>
     function toggleLanguage() {
@@ -76,11 +86,13 @@
       document.getElementById('service-list').innerHTML = isSpanish
         ? `
           <li><strong>Sunday:</strong> General Service - 4:30 PM</li>
-          <li><strong>Tuesday:</strong> Bible Study - 7:00 PM</li>
+          <li><strong>Monday:</strong> Prayer - 7:00 PM</li>
+          <li><strong>Tuesday:</strong> Service - 7:00 PM</li>
         `
         : `
           <li><strong>Domingo:</strong> Servicio General - 4:30 PM</li>
-          <li><strong>Martes:</strong> Estudio Bíblico - 7:00 PM</li>
+          <li><strong>Lunes:</strong> Oracion - 7:00 PM</li>
+          <li><strong>Martes:</strong> Servicio - 7:00 PM</li>
         `;
 
       document.getElementById("nav-offering").innerHTML = `
